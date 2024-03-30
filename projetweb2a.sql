@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : jeu. 28 mars 2024 à 23:37
+-- Généré le : sam. 30 mars 2024 à 01:24
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.1.17
 
@@ -29,12 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `reclamation` (
   `id` int(11) NOT NULL,
-  `name` varchar(30) NOT NULL,
+  `nom` varchar(30) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `number` int(11) NOT NULL,
-  `subject` varchar(255) NOT NULL,
+  `phone` int(11) NOT NULL,
+  `sujet` varchar(255) NOT NULL,
   `date` date NOT NULL,
-  `message` varchar(255) NOT NULL
+  `contenu` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
