@@ -1,4 +1,46 @@
 <?php
+include_once '../controller/reclamationC.php';
+include_once '../model/reclamation.php';
+
+
+    $error = "";
+    // create user
+    $reclamation = null;
+    // create an instance of the controller
+    $reclamationC = new reclamationC();
+    if (
+        isset($_POST['nom']) &&
+        isset($_POST['email']) &&
+        isset($_POST['phone']) &&
+        isset($_POST['sujet']) &&
+        isset($_POST['etat']) &&
+        isset($_POST['date']) &&
+        isset($_POST['contenu'])
+    ){
+        if (
+            !empty($_POST["nom"]) &&
+            !empty($_POST["email"]) &&
+            !empty($_POST["phone"]) &&
+            !empty($_POST["sujet"]) &&
+            !empty($_POST["etat"]) &&
+            !empty($_POST["date"]) &&
+            !empty($_POST["contenu"]) 
+        ) {
+            $reclamation = new reclamation(
+                $_POST['nom'],
+                $_POST['email'] ,
+                $_POST['phone'] ,
+                $_POST['sujet'] ,
+                $_POST['etat'] ,
+                $_POST['date'] ,
+                $_POST['contenu'] 
+            );
+			$reclamationC->ajouter($reclamation);
+           
+        }
+        else
+            $error = "Missing information";
+   }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -6,6 +48,7 @@
     <head>
         <meta charset="utf-8">
         <title>Jobflex </title>
+        <link rel="icon" href="img/logojob.png">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -59,7 +102,7 @@
                         <div class="dropdown">
                             <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small><i class="fa fa-home me-2"></i> My Space</small></a>
                             <div class="dropdown-menu rounded">
-                                <a href="#" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
+                                <a href="back/AjouterreclamationBack.php" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
                                 <a href="#" class="dropdown-item"><i class="fas fa-comment-alt me-2"></i> Inbox</a>
                                 <a href="#" class="dropdown-item"><i class="fas fa-bell me-2"></i> Notifications</a>
                                 <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
@@ -77,14 +120,14 @@
           <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
                     <h1 class="m-0"> <img src="img/logojob.png" alt="logo"  width="110"  height="190"></i></h1>
-                   <img src="" alt="" srcset="">
+                  
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="index.html" class="nav-item nav-link">Home</a>
+                        <a href="#" class="nav-item nav-link">Home</a>
                         <a href="about.html" class="nav-item nav-link">Offre d’emploi</a>
                         <a href="services.html" class="nav-item nav-link">Entretien</a>
                         <a href="packages.html" class="nav-item nav-link">Communauté</a>
@@ -99,7 +142,7 @@
                              
                             </div>
                         </div>
-                        <a href="reclamation.html" class="nav-item nav-link active">Reclamation</a>
+                        <a href="reclamationA.php" class="nav-item nav-link active">Reclamation</a>
                    
             </nav>
         </div>
@@ -151,24 +194,30 @@
                     <div class="col-lg-8">
                         <h3 class="mb-2">Send us a message</h3>
                         <p class="mb-4">"Nous comprenons l'importance de chaque réclamation et nous nous engageons à trouver une solution qui vous convienne."<a href="reclamation.html">Report  Now</a>.</p>
-                        <form>
+                        <form method="POST" onsubmit="return verif();">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="name"   name="name" placeholder="Your Name">
-                                        <label for="name">Your Name</label>
+                                        <input type="text" class="form-control border-0" id="nom"   name="nom" placeholder=" Name">
+                                        <label for="name"> Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="email" class="form-control border-0"  name ="email" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
+                                        <input type="text" class="form-control border-0"  name ="email" id="email" placeholder=" Email">
+                                        <label for="email"> Email</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="number"  name="number"  placeholder="Phone Number">
-                                        <label for="name">Your Number</label>
+                                        <input type="text" class="form-control border-0"  name ="etat" id="etat" placeholder=" etat">
+                                        <label for="etat"> etat</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control border-0" id="phone"  name="phone"  placeholder="Phone ">
+                                        <label for="name"> Phone</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -179,19 +228,19 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="subject"  name="subject"  placeholder="Subject">
+                                        <input type="text" class="form-control border-0" id="sujet"  name="sujet"  placeholder="Sujet">
                                         <label for="subject">Subject</label>
                                     </div>
                                 </div>
                                 
                                 <div class="col-12">
                                     <div class="form-floating">
-                                        <textarea class="form-control border-0" placeholder="Leave a message here"  name="message" id="message" style="height: 160px"></textarea>
-                                        <label for="message">Message</label>
+                                        <textarea class="form-control border-0" placeholder="Leave a message here"  name="contenu" id="contenu" style="height: 160px"></textarea>
+                                        <label for="message">contenu</label>
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Reclamation</button>
+                                    <button class="btn btn-primary w-100 py-3" type="submit" name="ajout" value="Ajouter" onsubmit="return verif()">Send Reclamation</button>
                                 </div>
                             </div>
                         </form>
@@ -343,6 +392,8 @@
 
         <!-- Template Javascript -->
         <script src="js/main.js"></script>
+        <script src="js/jscodes.js"></script>
+
     </body>
 
 </html>
