@@ -964,7 +964,7 @@ require "../../controller/reclamationC.php";
 							<span class="nav-text">GO TO FRONT </span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="page-login.html">site web</a></li>
+                            <li><a href="../reclamationA.php">site web</a></li>
                             <li><a href="page-register.html">Register</a></li>
                     
                          
