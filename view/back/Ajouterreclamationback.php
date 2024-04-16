@@ -1,5 +1,47 @@
 ﻿<?php
+require "../../model/reclamation.php";
+require "../../controller/reclamationC.php";
 
+
+
+    $error = "";
+    // create user
+    $reclamation = null;
+    // create an instance of the controller
+    $reclamationC = new reclamationC();
+    if (
+        isset($_POST['nom']) &&
+        isset($_POST['email']) &&
+        isset($_POST['phone']) &&
+        isset($_POST['sujet']) &&
+        isset($_POST['etat']) &&
+        isset($_POST['date']) &&
+        isset($_POST['contenu'])
+    ){
+        if (
+            !empty($_POST["nom"]) &&
+            !empty($_POST["email"]) &&
+            !empty($_POST["phone"]) &&
+            !empty($_POST["sujet"]) &&
+            !empty($_POST["etat"]) &&
+            !empty($_POST["date"]) &&
+            !empty($_POST["contenu"]) 
+        ) {
+            $reclamation = new reclamation(
+                $_POST['nom'],
+                $_POST['email'] ,
+                $_POST['phone'] ,
+                $_POST['sujet'] ,
+                $_POST['etat'] ,
+                $_POST['date'] ,
+                $_POST['contenu'] 
+            );
+			$reclamationC->ajouter($reclamation);
+           
+        }
+        else
+            $error = "Missing information";
+   }
 
 ?>
 <!DOCTYPE html>
@@ -919,22 +961,13 @@
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-clone"></i>
-							<span class="nav-text">Pages</span>
+							<span class="nav-text">GO TO FRONT </span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="page-login.html">Login</a></li>
+                            <li><a href="page-login.html">site web</a></li>
                             <li><a href="page-register.html">Register</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="page-error-400.html">Error 400</a></li>
-                                    <li><a href="page-error-403.html">Error 403</a></li>
-                                    <li><a href="page-error-404.html">Error 404</a></li>
-                                    <li><a href="page-error-500.html">Error 500</a></li>
-                                    <li><a href="page-error-503.html">Error 503</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="page-lock-screen.html">Lock Screen</a></li>
-                            <li><a href="empty-page.html">Empty Page</a></li>
+                    
+                         
                         </ul>
                     </li>
                 </ul>

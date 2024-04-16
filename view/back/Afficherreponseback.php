@@ -1,5 +1,20 @@
 <?php
+
+require "../../controller/reclamationC.php";
+require '../../controller/reponseC.php';
+
+$d = new reponseC();
+$r = new reclamationC();
+
+if (isset($_POST["aff"]) == "Tri") {
+  $tab = $d->triReponse();
+} else if (isset($_POST["aff"]) == "Search") {
+  $tab = $d->rechercheReponse($_POST["rech"]);
+} else
+  $tab = $d->afficher();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -918,22 +933,12 @@ Liste de Réponses                            </div>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-clone"></i>
-							<span class="nav-text">Pages</span>
+							<span class="nav-text">GO TO FRONT </span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="page-login.html">Login</a></li>
-                            <li><a href="page-register.html">Register</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="page-error-400.html">Error 400</a></li>
-                                    <li><a href="page-error-403.html">Error 403</a></li>
-                                    <li><a href="page-error-404.html">Error 404</a></li>
-                                    <li><a href="page-error-500.html">Error 500</a></li>
-                                    <li><a href="page-error-503.html">Error 503</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="page-lock-screen.html">Lock Screen</a></li>
-                            <li><a href="empty-page.html">Empty Page</a></li>
+                            <li><a href="">site web </a></li>
+                            <li><a href="">Register</a></li>
+                        
                         </ul>
                     </li>
                 </ul>
@@ -995,10 +1000,10 @@ Liste de Réponses                            </div>
           <div class="card recent-sales overflow-auto">
             <div class="card-body">
              
-                    <form action="afficherReclamation.php" method="POST">
+                 
                 
               
-              <main id="main" class="main">
+<main id="main" class="main">
 
     <div class="pagetitle">
       <h1>Réponses</h1>
@@ -1037,7 +1042,17 @@ Liste de Réponses                            </div>
                       </tr>
                     </thead>
                     <tbody>
-                    
+					<?php foreach ($tab as $rep) { ?>
+                      <tr>
+                        <td> <?= $rep['date'] ?> </td>
+                        <td> <?= $rep['description'] ?> </td>
+                        <td> <?= $r->recupererReclamation($rep['id_reclamation'])["email"] ?> </td>
+                        <td>
+                            <a href="modifierreponseback.php?id=<?php echo $rep['id']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
+                            <a href="supprimerreponseback.php?id=<?php echo $rep['id']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a>
+                        </td>
+                      </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
               </div>

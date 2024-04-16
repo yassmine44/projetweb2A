@@ -119,8 +119,7 @@ include_once '../model/reclamation.php';
         <div class="container-fluid position-relative p-0">
           <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
-                    <h1 class="m-0"> <img src="img/logojob.png" alt="logo"  width="110"  height="190"></i></h1>
-                  
+                    <h1 class="m-0"></i>Jobflex</h1>
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
@@ -193,7 +192,7 @@ include_once '../model/reclamation.php';
                     </div>
                     <div class="col-lg-8">
                         <h3 class="mb-2">Send us a message</h3>
-                        <p class="mb-4">"Nous comprenons l'importance de chaque réclamation et nous nous engageons à trouver une solution qui vous convienne."<a href="reclamation.html">Report  Now</a>.</p>
+                        <p class="mb-4">"Nous comprenons l'importance de chaque réclamation et nous nous engageons à trouver une solution qui vous convienne."<a href="reclamationA.php">Report  Now</a>.</p>
                         <form method="POST" onsubmit="return verif();">
                             <div class="row g-3">
                                 <div class="col-md-6">

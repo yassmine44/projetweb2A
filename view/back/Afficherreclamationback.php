@@ -1,4 +1,16 @@
 ﻿<?php
+require "../../controller/reclamationC.php";
+require "../../model/reclamation.php";
+
+$d = new reclamationC();
+
+if (isset($_POST["aff"]) == "Tri") {
+  $tab = $d->triReclamation();
+} else if (isset($_POST["aff"] )== "Search") {
+  $tab = $d->rechercheReclamation($_POST["rech"]);
+} else
+  $tab = $d->afficher();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -918,22 +930,12 @@ Affichage du Réclamations                            </div>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-clone"></i>
-							<span class="nav-text">Pages</span>
+							<span class="nav-text">GO TO FRONT</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="page-login.html">Login</a></li>
-                            <li><a href="page-register.html">Register</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="page-error-400.html">Error 400</a></li>
-                                    <li><a href="page-error-403.html">Error 403</a></li>
-                                    <li><a href="page-error-404.html">Error 404</a></li>
-                                    <li><a href="page-error-500.html">Error 500</a></li>
-                                    <li><a href="page-error-503.html">Error 503</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="page-lock-screen.html">Lock Screen</a></li>
-                            <li><a href="empty-page.html">Empty Page</a></li>
+                            <li><a href="">site web</a></li>
+                            <li><a href="">Register</a></li>
+                           
                         </ul>
                     </li>
                 </ul>
@@ -977,13 +979,7 @@ Affichage du Réclamations                            </div>
         <div class="content-body">
             <div class="container-fluid">
 				
-				<div class="row page-titles">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Affichage</a></li>
-					</ol>
-                </div>
-                <!-- row -->
+				
 
 
                 <main id="main" class="main">
@@ -1005,7 +1001,7 @@ Affichage du Réclamations                            </div>
           <div class="card recent-sales overflow-auto">
             <div class="card-body">
                 <center>
-                    <form action="afficherReclamation.php" method="POST">
+                    <form action="Afficherreclamationback.php" method="POST">
                         <br>
                         <input type="text" placeholder="Search..." name="rech" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" >
                         <input type="submit" class="btn btn-outline-info btn-sm" name="aff" value="Search" />
@@ -1029,9 +1025,56 @@ Affichage du Réclamations                            </div>
                         </tr>
                     </thead>
                     <tbody>
-                        
+					<?php foreach ($tab as $rec) { ?>
+                        <tr>
+                            <td> <?= $rec['nom'] ?> </td>
+                            <td> <?= $rec['email'] ?> </td>
+                            <td> <?= $rec['phone'] ?> </td>
+                            <td> <?= $rec['sujet'] ?> </td>
+                            <td> 
+                              <?php
+                                if ($rec['etat'] == "Approved") {
+                                    echo '<span class="badge bg-success">' . $rec['etat'] . '</div>';
+                                } else if ($rec['etat'] == "Rejected") {
+                                    echo '<span class="badge bg-danger">' . $rec['etat'] . '</div>';
+                                } else {
+                                  echo '<span class="badge bg-warning">' . $rec['etat'] . '</div>';
+                              }
+                              ?>
+                            </td>
+                            <td> <?= $rec['date'] ?> </td>
+                            <td> <?= $rec['contenu'] ?> </td>
+                            <td>
+                                <a href="modifierreclamationback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
+                                <a href="supprimerreclamationback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a><br><br>
+                                <a href="ajouterreponseback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-warning btn-sm">Repondre</button></a>
+                            </td>
+                        </tr>
+                    <?php } ?>
                     </tbody>
                 </table>
+              </div>
+			  <div align="center">
+                  <form method="POST" action="generate_pdf.php">
+                      <button type="submit" id="pdf" name="generate_pdf" class="btn btn-outline-primary btn-sm">
+                          <i class="fa fa-pdf" aria-hidden="true"></i>
+                          Générer PDF
+                      </button> 
+                  </form> 
+                </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+	  <div class="row ">
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body" >
+              <h4 class="card-title">Statistiques des Réclamations et des Réponses</h4>
+              <div class="col-lg-10 grid-margin stretch-card">
+                <div style="margin-left:250px;margin-top:50px;height:450;width:450px;">
+                    <canvas id="myChartt" width="400" height="400"></canvas>
+                </div>
               </div>
             </div>
           </div>
@@ -1042,7 +1085,7 @@ Affichage du Réclamations                            </div>
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="../index.htm" target="_blank">JOBFLEX</a> 2024</p>
+                <p>Copyright © Designed &amp; Developed by <a href="../index.html" target="_blank">JOBFLEX</a> 2024</p>
             </div>
         </div>
         <!--**********************************
@@ -1082,5 +1125,30 @@ Affichage du Réclamations                            </div>
 	<script src="js/dlabnav-init.js"></script>
 	<script src="js/demo.js"></script>
     <script src="js/styleSwitcher.js"></script>
+	<script>
+      var xValues = ["Réclamations avec reponses","Réclamations sans reponses"];
+      var yValues = [<?php echo $d->count_AvecReponse();?>, <?php echo $d->count_Reclamation()-$d->count_AvecReponse();?>];
+      var barColors = [
+              "#0d6efd",
+                "#0dcaf0"
+            ];  
+
+          new Chart("myChartt", {
+              type: "doughnut",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                    display: true,
+                    text: "Réclamations - Réponses"
+                    }
+                }
+          });
+    </script>
 </body>
 </html>
