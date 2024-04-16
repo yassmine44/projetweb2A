@@ -90,6 +90,7 @@
                         <a href="services.html" class="nav-item nav-link">Services</a>
                         <a href="packages.html" class="nav-item nav-link">Packages</a>
                         <a href="blog.html" class="nav-item nav-link">Blog</a>
+                       
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu m-0">
@@ -100,9 +101,11 @@
                                 <a href="guides.html" class="dropdown-item">Travel Guides</a>
                                 <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                                 <a href="404.html" class="dropdown-item">404 Page</a>
+                                <a href="listeentretien.php" class="nav-item nav-link">Entretien</a>
                             </div>
                         </div>
                         <a href="reclamationA.php" class="nav-item nav-link">Contact</a>
+                        <a href="ajouter.php" class="nav-item nav-link">Entretien</a>
                     </div>
                     <a href="" class="btn btn-primary rounded-pill py-2 px-4 ms-lg-4">Book Now</a>
                 </div>
