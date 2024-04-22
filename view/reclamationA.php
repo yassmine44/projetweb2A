@@ -210,7 +210,7 @@ include_once '../model/reclamation.php';
                                 <div class="col-md-6">
                                     <div class="form-floating">
                                         <input type="text" class="form-control border-0"  name ="etat" id="etat" placeholder=" etat">
-                                        <label for="etat"> etat</label>
+                                        <label for="etat"> PROBLEM</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -221,7 +221,7 @@ include_once '../model/reclamation.php';
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="date" class="form-control border-0" id="date"  name="date" placeholder="date">
+                                        <input type="date" class="form-control border-0" id="date"  name="date" placeholder="date"  value="<?php echo date('Y-m-d'); ?>">
                                         <label for="date">Date</label>
                                     </div>
                                 </div>
@@ -244,6 +244,20 @@ include_once '../model/reclamation.php';
                             </div>
                         </form>
                     </div>
+                    <table class="table">
+                    <thead>
+                        <tr>
+                            <th> ID </th>  
+                            <th> Date </th>
+                            <th> Réponse </th>
+                         
+                        
+                        </tr>
+                    </thead>
+                    <tbody>
+					
+                    </tbody>
+                </table>
                     <div class="col-12">
                         <div class="rounded">
                             
