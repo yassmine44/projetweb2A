@@ -21,6 +21,12 @@ class comment
     {
         return $this->id;
     }
+    public function setID($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
 
     
     public function getNom()

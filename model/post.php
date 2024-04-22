@@ -5,20 +5,26 @@ class post
     private ?int $id = null;
     private ?string $date = null;
     private ?string $description = null;
-    private ?int $post = null;
+   // private ?int $id_comment = null;
 
 
-    public function __construct($date, $description, $post)
+    public function __construct($date, $description)
     {
         $this->date = $date;
         $this->description = $description;
-        $this->post = $post;
+        //$this->id_comment = $id_comment;
     }
 
     
     public function getId()
     {
         return $this->id;
+    }
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     
@@ -49,17 +55,4 @@ class post
         return $this;
     }
 
-
-    public function getIDReclamation()
-    {
-        return $this->post;
-    }
-
-    
-    public function setIDReclamation($post)
-    {
-        $this->post = $post;
-
-        return $this;
-    }
 }

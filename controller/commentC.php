@@ -97,7 +97,7 @@ class commentC
             $e->getMessage();
         }
     }
-      function supprimer($id)
+    function supprimer($id)
     {
         $sql = "DELETE FROM comment WHERE id = :id";
         $db = config::getConnexion();
@@ -110,6 +110,7 @@ class commentC
             die('Error:' . $e->getMessage());
         }
     }
+
     function count_comment(){
 
         $sql="SELECT count(id) FROM comment" ;

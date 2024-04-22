@@ -1,11 +1,11 @@
 <?php
-require '../../controller/reponseC.php';
-require "../../model/reponse.php";
+require '../../controller/postC.php';
+require "../../model/post.php";
 
 
-$d = new reponseC();
+$d = new postC();
 $d->supprimer($_GET["id"]);
-header('Location:Afficherreponseback.php');
+header('Location:Afficherpostback.php');
 
 
 ?>

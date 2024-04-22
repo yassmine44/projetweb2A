@@ -1,36 +1,37 @@
 <?php
 
-require "../../model/reponse.php";
-require "../../controller/reponseC.php";
+require "../../model/post.php";
+require "../../controller/postC.php";
 
     $error = "";
     // create user
-    $reponse = null;
+    $post = null;
     // create an instance of the controller
-    $reponseC = new reponseC();
+    $postC = new postC();
     if (
         isset($_POST['date']) &&
-        isset($_POST['description']) &&
-        isset($_POST['id_reclamation'])
+        isset($_POST['description']) 
+        
     ){
+
         if (
             !empty($_POST["date"]) &&
-            !empty($_POST["description"]) &&
-            !empty($_POST["id_reclamation"])
+            !empty($_POST["description"]) 
+         
         ) {
-            $reponse = new reponse(
+            $post = new post(
                 $_POST['date'],
-                $_POST['description'] ,
-                $_POST['id_reclamation']
+                $_POST['description'] 
+             
             );
-			$reponseC->modifier($reponse,$_GET['id']);
+			$postC->modifier($post,$_GET['id']);
         }
         else
             $error = "Missing information";
     }  
 	if(isset($_POST['modifier']))
 	{
-    	header ('Location:Afficherreponseback.php');
+    	header ('Location:Afficherpostback.php');
 	}
 
 ?>
@@ -948,7 +949,7 @@ require "../../controller/reponseC.php";
                         <ul aria-expanded="false">
                         <li><a href="Ajouterreclamationback.php">Ajouter Réclamation</a></li>
                             <li><a href="Afficherreclamationback.php">Afficher Réclamation </a></li>
-                            <li><a href="Afficherreponseback.php">Afficher Réponse   </a></li>                        </ul>
+                            <li><a href="Afficherpostback.php">Afficher Réponse   </a></li>                        </ul>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-clone"></i>
@@ -1014,11 +1015,11 @@ debut         ***********************************-->
 <main id="main" class="main">
 
 <div class="pagetitle">
-  <h1>Réponses</h1>
+  <h1>post</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item">Réponses</li>
+      <li class="breadcrumb-item">post</li>
       <li class="breadcrumb-item active">Modifier</li>
     </ol>
   </nav>
@@ -1029,11 +1030,11 @@ debut         ***********************************-->
     <div class="col-12">
       <div class="card recent-sales overflow-auto">
         <div class="card-body">
-          <h5 class="card-title">Réponses <span>| Modifier</span></h5>
+          <h5 class="card-title">post <span>| Modifier</span></h5>
           <br>    
           <?php 
             if (isset($_GET['id'])){
-              $rep = $reponseC->recupererReponse($_GET['id']);
+              $rep = $postC->recupererpost($_GET['id']);
           ?>
           <form method="POST">
             <div class="mb-5">
@@ -1050,12 +1051,7 @@ debut         ***********************************-->
                         <textarea name="description" class="form-control" id="description" placeholder="Description"><?php echo $rep['description']?></textarea>
                       </div>
                     </div>
-                    <div class="row mb-3">
-                      <div class="col-sm-10">
-                        <input type="text" name="id_reclamation" value="<?php echo $rep['id_reclamation']?>" class="form-control file-upload-info" placeholder="Reclamation de Mr/Mme" readonly="readonly">
-                      </div>
-                      <br>
-                    </div>
+                    
                     <div class="text-center">
                       <input class="btn btn-primary" type="submit" name="modifier" value="Modifier">
                     </div>

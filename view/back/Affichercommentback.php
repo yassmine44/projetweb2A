@@ -1018,7 +1018,7 @@ Affichage des commantaires                            </div>
                             
                             <th> Contenu </th>
                             <th> CRUD </th>
-                            <th>    </th>
+                            
                         </tr>
                     </thead>
                     <tbody>
@@ -1026,13 +1026,11 @@ Affichage des commantaires                            </div>
                         <tr>
                             <td> <?= $rec['nom'] ?> </td>
                             <td> <?= $rec['email'] ?> </td>
-                            
-                           
                             <td> <?= $rec['contenu'] ?> </td>
                             <td>
                                 <a href="modifiercommentback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
-                                <a href="supprimercommentback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a><br><br>
-                                <a href="ajouterpostback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-warning btn-sm">Repondre</button></a>
+                                <a href="supprimercommentback.php?id=<?php  echo $rec['id']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a><br><br>
+                                
                             </td>
                         </tr>
                     <?php } ?>

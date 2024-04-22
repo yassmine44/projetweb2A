@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : mar. 16 avr. 2024 à 00:13
+-- Généré le : mar. 16 avr. 2024 à 15:04
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -50,7 +50,11 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`id`, `nom`, `email`, `contenu`) VALUES
-(0, 'hh', 'megblifamily@gmail.com', '20583408');
+(1, 'hh', 'megblifamily@gmail.com', '20583408'),
+(2, 'hfhfhf', 'megblifamily@gmail.com', 'd'),
+(3, 'hh', 'megblifamily@gmail.com', 'youuu'),
+(4, 'rana', 'megblifamily@gmail.com', 'yasouuuuuuuuuu'),
+(5, 'yass ', 'megblifamily@gmail.com', 'vvv');
 
 -- --------------------------------------------------------
 
@@ -103,11 +107,18 @@ CREATE TABLE `gestionblog` (
 --
 
 CREATE TABLE `post` (
-  `id` int(50) NOT NULL,
+  `id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `description` text NOT NULL,
-  `id_comment` int(50) NOT NULL
+  `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `post`
+--
+
+INSERT INTO `post` (`id`, `date`, `description`) VALUES
+(1, '0045-04-04', '55h5h'),
+(3, '0004-04-04', 'ppppppppppppppp');
 
 -- --------------------------------------------------------
 
@@ -219,6 +230,12 @@ ALTER TABLE `reponse`
 --
 
 --
+-- AUTO_INCREMENT pour la table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT pour la table `entreprise`
 --
 ALTER TABLE `entreprise`
@@ -229,6 +246,12 @@ ALTER TABLE `entreprise`
 --
 ALTER TABLE `entretien`
   MODIFY `ide` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `post`
+--
+ALTER TABLE `post`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `reclamation`

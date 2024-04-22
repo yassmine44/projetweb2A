@@ -1,6 +1,4 @@
 <?php
-
-
 include_once 'config.php';
 include '../model/post.php';
 class postC
@@ -23,7 +21,6 @@ class postC
         $db = config::getConnexion();
         $req = $db->prepare($sql);
         $req->bindValue(':id', $id);
-
         try {
             $req->execute();
         } catch (Exception $e) {
@@ -33,15 +30,15 @@ class postC
 
     function ajouter($post)
     {
-        $sql = "INSERT INTO post (date, description, id_reclamation)
-        VALUES (:date,:description, :id_reclamation)";
+        $sql = "INSERT INTO post (date, description)
+        VALUES (:date,:description)";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
             $query->execute([
                 'date' => $post->getDate(),
                 'description' => $post->getDescription(),
-                'id_reclamation' => $post->getIDReclamation()
+                
             ]);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
@@ -54,15 +51,14 @@ class postC
             $query = $db->prepare(
                 'UPDATE post SET 
                     date = :date, 
-                    description = :description,
-                    id_reclamation = :id_reclamation
+                    description = :description
                 WHERE id= :id'
             );
             $query->execute([
                 'id' => $id,
                 'date' => $post->getDate(),
-                'description' => $post->getDescription(),
-                'id_reclamation' => $post->getIDReclamation()
+                'description' => $post->getDescription()
+                
             ]);
             echo $query->rowCount() . " records UPDATED successfully <br>";
         } catch (PDOException $e) {

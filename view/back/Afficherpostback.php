@@ -1,20 +1,17 @@
 <?php
-
-require "../../controller/commentC.php";
-require '../../controller/postC.php';
+require "../../controller/postC.php";
+require "../../model/post.php";
 
 $d = new postC();
-$r = new commentC();
 
 if (isset($_POST["aff"]) == "Tri") {
   $tab = $d->tripost();
-} else if (isset($_POST["aff"]) == "Search") {
+} else if (isset($_POST["aff"] )== "Search") {
   $tab = $d->recherchepost($_POST["rech"]);
 } else
   $tab = $d->afficher();
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -599,7 +596,7 @@ if (isset($_POST["aff"]) == "Tri") {
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-Liste de post                            </div>
+Affichage du Réclamations                            </div>
 							
                         </div>
                         <ul class="navbar-nav header-right">
@@ -923,22 +920,22 @@ Liste de post                            </div>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-table"></i>
-							<span class="nav-text">comments</span>
+							<span class="nav-text">Réclamation</span>
 						</a>
                         <ul aria-expanded="false">
-                        <li><a href="Ajoutercommentback.php">Ajouter comments</a></li>
-                            <li><a href="Affichercommentback.php">Afficher comments </a></li>
-                            <li><a href="Afficherpostback.php">Afficher post   </a></li>
+                        <li><a href="Ajouterpostback.php">Ajouter Réclamation</a></li>
+                            <li><a href="Afficherpostback.php">Afficher Réclamation </a></li>
+                            <li><a href="Afficherreponseback.php">Afficher Réponse   </a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-clone"></i>
-							<span class="nav-text">GO TO FRONT </span>
+							<span class="nav-text">GO TO FRONT</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="">site web </a></li>
+                            <li><a href="">site web</a></li>
                             <li><a href="">Register</a></li>
-                        
+                           
                         </ul>
                     </li>
                 </ul>
@@ -948,7 +945,7 @@ Liste de post                            </div>
 							<img src="images/pic5.jpg" alt="">
 						</div>
 						<div class="profile-info1">
-							<h4 class="fs-18 font-w500">yassmine megbli</h4>
+							<h4 class="fs-18 font-w500">chaima khiari</h4>
 							<span>chaimakhiari@gmail.com</span>
 						</div>
 						<div class="profile-button">
@@ -982,35 +979,17 @@ Liste de post                            </div>
         <div class="content-body">
             <div class="container-fluid">
 				
-				<div class="row page-titles">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">post</a></li>
-					</ol>
-                </div>
-                <!-- row -->
+				
 
 
                 <main id="main" class="main">
 
-    
-    <section class="section dashboard">
-      <div class="row">
-        <div class="col-12">
-          <div class="card recent-sales overflow-auto">
-            <div class="card-body">
-             
-                 
-                
-              
-<main id="main" class="main">
-
     <div class="pagetitle">
-      <h1>post</h1>
+      <h1>Réclamations</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="Afficherreclamationback.php">Home</a></li>
-          <li class="breadcrumb-item">post</li>
+          <li class="breadcrumb-item"><a href="AjouterpostBack.php">Home</a></li>
+          <li class="breadcrumb-item">Réclamations</li>
           <li class="breadcrumb-item active">Affichage</li>
         </ol>
       </nav>
@@ -1022,47 +1001,68 @@ Liste de post                            </div>
           <div class="card recent-sales overflow-auto">
             <div class="card-body">
                 <center>
-                    <form action="Afficherreponseback.php" method="POST">
+                    <form action="Afficherpostback.php" method="POST">
                         <br>
                         <input type="text" placeholder="Search..." name="rech" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" >
                         <input type="submit" class="btn btn-outline-info btn-sm" name="aff" value="Search" />
                         <input type="submit" class="btn btn-outline-primary btn-sm" name="aff" value="Tri" />
                     </form>
                 </center>
-             
+              <h5 class="card-title">Réclamations <span>| Affichage</span></h5>
               <div class="table-responsive">
                 <table class="table">
                     <thead>
-                      <tr>
-                        <th> Date </th>
-                        <th> Description </th>
-                        <th> AUteur </th>
-                        <th>CRUD </th>
-                        <th>    </th>
-                      </tr>
+                        <tr>
+                           
+                       
+                          
+                            <th> Date </th>
+							<th> description </th>
+                            
+                           
+                            <th>    </th>
+                        </tr>
                     </thead>
                     <tbody>
-					<?php foreach ($tab as $rep) { ?>
-                      <tr>
-                        <td> <?= $rep['date'] ?> </td>
-                        <td> <?= $rep['description'] ?> </td>
-                        <td> <?= $r->recupererReclamation($rep['id_reclamation'])["email"] ?> </td>
-                        <td>
-                            <a href="modifierpostback.php?id=<?php echo $rep['id']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
-                            <a href="supprimerpostback.php?id=<?php echo $rep['id']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a>
-                        </td>
-                      </tr>
+					<?php foreach ($tab as $rec) { ?>
+                        <tr>
+                            
+                            
+                            
+                            <td> <?= $rec['date'] ?> </td>
+                            <td> <?= $rec['description'] ?> </td>
+                            <td>
+                                <a href="modifierreponseback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
+                                <a href="supprimerpostback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a><br><br>
+                                
+                            </td>
+                        </tr>
                     <?php } ?>
                     </tbody>
                 </table>
               </div>
+			  <div align="center">
+                  <form method="POST" action="generate_pdf.php">
+                      <button type="submit" id="pdf" name="generate_pdf" class="btn btn-outline-primary btn-sm">
+                          <i class="fa fa-pdf" aria-hidden="true"></i>
+                          Générer PDF
+                      </button> 
+                  </form> 
+                </div> 
             </div>
           </div>
         </div>
       </div>
-    </section>
-
-  </main><!-- End #main -->
+	  <div class="row ">
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body" >
+              <h4 class="card-title">Statistiques des Réclamations et des Réponses</h4>
+              <div class="col-lg-10 grid-margin stretch-card">
+                <div style="margin-left:250px;margin-top:50px;height:450;width:450px;">
+                    <canvas id="myChartt" width="400" height="400"></canvas>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -1072,7 +1072,7 @@ Liste de post                            </div>
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="../index.htm" target="_blank">JOBFLEX</a> 2024</p>
+                <p>Copyright © Designed &amp; Developed by <a href="../index.html" target="_blank">JOBFLEX</a> 2024</p>
             </div>
         </div>
         <!--**********************************
@@ -1112,5 +1112,30 @@ Liste de post                            </div>
 	<script src="js/dlabnav-init.js"></script>
 	<script src="js/demo.js"></script>
     <script src="js/styleSwitcher.js"></script>
+	<script>
+      var xValues = ["Réclamations avec reponses","Réclamations sans reponses"];
+      var yValues = [<?php echo $d->count_AvecReponse();?>, <?php echo $d->count_post()-$d->count_AvecReponse();?>];
+      var barColors = [
+              "#0d6efd",
+                "#0dcaf0"
+            ];  
+
+          new Chart("myChartt", {
+              type: "doughnut",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                    display: true,
+                    text: "Réclamations - Réponses"
+                    }
+                }
+          });
+    </script>
 </body>
 </html>

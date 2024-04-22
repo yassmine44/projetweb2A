@@ -29,8 +29,11 @@ require '../../controller/postC.php';
             $error = "Missing information";
     }
 
-    $comment=$commentC->recuperercomment($_GET["id"]);
-
+    //$comment=$commentC->recuperercomment($_GET["id"]);
+	if (isset($_POST['ajouter']))
+	{
+		header ('Location::ajouterpostback.php');
+	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +88,7 @@ require '../../controller/postC.php';
             Nav header start
         ***********************************-->
 		<div class="nav-header">
-        <a href="Ajoutercommentback.php" class="brand-logo">
+        <a href="ajoutercommentback.php" class="brand-logo">
         <div> <center> <img src="images/logojob.png" alt="logo"  width="80"  height="80"></center></div>
            
                
@@ -1032,7 +1035,7 @@ require '../../controller/postC.php';
     <div class="col-12">
       <div class="card recent-sales overflow-auto">
         <div class="card-body">
-          <h5 class="card-title">Réponses <span>| Ajout</span></h5>
+          <h5 class="card-title">post <span>| Ajout</span></h5>
           <br>    
           <form method="POST" onsubmit="return verif();" >
             <div class="mb-5">

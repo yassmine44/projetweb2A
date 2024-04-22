@@ -11,10 +11,7 @@ function validateEmail(email) {
 function verif() {
   let nom = document.getElementById("nom").value.trim();
   let email = document.getElementById("email").value.trim();
-  let phone = document.getElementById("phone").value.trim();
-  let date = document.getElementById("date").value.trim();
-  let sujet = document.getElementById("sujet").value.trim();
-  let etat = document.getElementById("etat").value.trim();
+  
   let contenu = document.getElementById("contenu").value.trim();
 
   if (nom === "") {
@@ -37,26 +34,7 @@ function verif() {
     return false;
   }
 
-  if (phone === "") {
-    alert("Veuillez saisir le numéro de téléphone.");
-    return false;
-  }
-
-  if (sujet === "") {
-    alert("Veuillez saisir le sujet.");
-    return false;
-  }
-
-  if (etat !== "Approved" && etat !== "Rejected"  && etat !== "Pending") {
-    alert("Veuillez choisir un état valide (Rejected / Approved or Pending ).");
-    return false;
-  }
-  
-
-  if (date === "") {
-    alert("Veuillez saisir la date.");
-    return false;
-  }
+ 
 
   if (contenu === "") {
     alert("Veuillez saisir le contenu.");
