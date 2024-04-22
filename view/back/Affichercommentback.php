@@ -596,7 +596,7 @@ if (isset($_POST["aff"]) == "Tri") {
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-Affichage des commantaires                            </div>
+Affichage du comments                            </div>
 							
                         </div>
                         <ul class="navbar-nav header-right">
@@ -920,12 +920,12 @@ Affichage des commantaires                            </div>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-table"></i>
-							<span class="nav-text">comments</span>
+							<span class="nav-text">Réclamation</span>
 						</a>
                         <ul aria-expanded="false">
-                        <li><a href="Ajoutercommentback.php">Ajouter post</a></li>
-                            <li><a href="Affichercommentback.php">Afficher comment </a></li>
-                            <li><a href="Afficherpostback.php">Afficher post   </a></li>
+                        <li><a href="Ajoutercommentback.php">Ajouter Réclamation</a></li>
+                            <li><a href="Affichercommentback.php">Afficher Réclamation </a></li>
+                            <li><a href="Afficherreponseback.php">Afficher Réponse   </a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
@@ -989,7 +989,7 @@ Affichage des commantaires                            </div>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="AjoutercommentBack.php">Home</a></li>
-          <li class="breadcrumb-item">commantaires</li>
+          <li class="breadcrumb-item">comments</li>
           <li class="breadcrumb-item active">Affichage</li>
         </ol>
       </nav>
@@ -1017,8 +1017,8 @@ Affichage des commantaires                            </div>
                             <th> Email </th>
                             
                             <th> Contenu </th>
-                            <th> CRUD </th>
-                            
+                           
+                            <th>    </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1026,11 +1026,12 @@ Affichage des commantaires                            </div>
                         <tr>
                             <td> <?= $rec['nom'] ?> </td>
                             <td> <?= $rec['email'] ?> </td>
+                            
                             <td> <?= $rec['contenu'] ?> </td>
                             <td>
                                 <a href="modifiercommentback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
-                                <a href="supprimercommentback.php?id=<?php  echo $rec['id']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a><br><br>
-                                
+                                <a href="delete.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a><br><br>
+                               
                             </td>
                         </tr>
                     <?php } ?>
@@ -1038,7 +1039,7 @@ Affichage des commantaires                            </div>
                 </table>
               </div>
 			  <div align="center">
-                  <form method="POST" action="generate_pdf.php">
+                  <form method="POST" action="fpdf.php">
                       <button type="submit" id="pdf" name="generate_pdf" class="btn btn-outline-primary btn-sm">
                           <i class="fa fa-pdf" aria-hidden="true"></i>
                           Générer PDF

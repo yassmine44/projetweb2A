@@ -1032,7 +1032,7 @@ Affichage du Réclamations                            </div>
                             <td> <?= $rec['date'] ?> </td>
                             <td> <?= $rec['description'] ?> </td>
                             <td>
-                                <a href="modifierreponseback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
+                                <a href="modifierreposback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
                                 <a href="supprimerpostback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a><br><br>
                                 
                             </td>
