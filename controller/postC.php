@@ -30,14 +30,14 @@ class postC
 
     function ajouter($post)
     {
-        $sql = "INSERT INTO post (date, description)
-        VALUES (:date,:description)";
+        $sql = "INSERT INTO post (date, nom)
+        VALUES (:date,:nom)";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
             $query->execute([
                 'date' => $post->getDate(),
-                'description' => $post->getDescription(),
+                'nom' => $post->getnom(),
                 
             ]);
         } catch (Exception $e) {
@@ -51,13 +51,13 @@ class postC
             $query = $db->prepare(
                 'UPDATE post SET 
                     date = :date, 
-                    description = :description
+                    nom = :nom
                 WHERE id= :id'
             );
             $query->execute([
                 'id' => $id,
                 'date' => $post->getDate(),
-                'description' => $post->getDescription()
+                'nom' => $post->getnom()
                 
             ]);
             echo $query->rowCount() . " records UPDATED successfully <br>";
@@ -95,7 +95,7 @@ class postC
 
     function recherchepost($rech)
     {
-        $sql = "SELECT * FROM post where post.date like '%$rech%' or post.description like '%$rech%'";
+        $sql = "SELECT * FROM post where post.date like '%$rech%' or post.nom like '%$rech%'";
         $db = config::getConnexion();
         try {
             $list = $db->query($sql);

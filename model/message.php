@@ -1,6 +1,6 @@
 <?php
 
-class comment
+class message
 {
     private ?int $id = null;
     private ?string $nom = null;

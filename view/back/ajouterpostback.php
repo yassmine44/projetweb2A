@@ -1,13 +1,13 @@
 <?php
 require "../../model/post.php";
-require "../../controller/commentC.php";
+require "../../controller/messageC.php";
 require '../../controller/postC.php';
 
 
     $error = "";
     // create user
     $post = null;
-    $commentC = new commentC();
+    $messageC = new messageC();
     // create an instance of the controller
     $postC = new postC();
     if (
@@ -29,7 +29,7 @@ require '../../controller/postC.php';
             $error = "Missing information";
     }
 
-    //$comment=$commentC->recuperercomment($_GET["id"]);
+    //$message=$messageC->recuperermessage($_GET["id"]);
 	if (isset($_POST['ajouter']))
 	{
 		header ('Location::ajouterpostback.php');
@@ -88,7 +88,7 @@ require '../../controller/postC.php';
             Nav header start
         ***********************************-->
 		<div class="nav-header">
-        <a href="ajoutercommentback.php" class="brand-logo">
+        <a href="ajoutermessageback.php" class="brand-logo">
         <div> <center> <img src="images/logojob.png" alt="logo"  width="80"  height="80"></center></div>
            
                
@@ -507,7 +507,7 @@ require '../../controller/postC.php';
 											<div class="img_cont success">RU</div>
 											<div class="user_info">
 												<span>Perfection Simplified</span>
-												<p>Jame Smith commented on your status</p>
+												<p>Jame Smith messageed on your status</p>
 											</div>
 										</div>
 									</li>
@@ -820,7 +820,7 @@ require '../../controller/postC.php';
 		</div>
                     
         <!--**********************************
-            Header end ti-comment-alt
+            Header end ti-message-alt
         ***********************************-->
 
         <!--**********************************
@@ -851,7 +851,7 @@ require '../../controller/postC.php';
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="app-profile.html">Profile</a></li>
-							<li><a href="post-details.html">Post Details</a></li>
+							<li><a href="post-details.html">post Details</a></li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
                                 <ul aria-expanded="false">
                                     <li><a href="email-compose.html">Compose</a></li>
@@ -946,8 +946,8 @@ require '../../controller/postC.php';
 							<span class="nav-text">blog</span>
 						</a>
                         <ul aria-expanded="false">
-                        <li><a href="ajoutercommentback.php">Ajouter post</a></li>
-                            <li><a href="affichercommentback.php">Afficher comment </a></li>
+                        <li><a href="ajoutermessageback.php">Ajouter post</a></li>
+                            <li><a href="affichermessageback.php">Afficher message </a></li>
                             <li><a href="Afficherpostback.php">Afficher post   </a></li>                        </ul>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">

@@ -828,7 +828,7 @@ Affichage du Réclamations                            </div>
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="app-profile.html">Profile</a></li>
-							<li><a href="post-details.html">Post Details</a></li>
+							<li><a href="post-details.html">post Details</a></li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
                                 <ul aria-expanded="false">
                                     <li><a href="email-compose.html">Compose</a></li>
@@ -923,7 +923,7 @@ Affichage du Réclamations                            </div>
 							<span class="nav-text">Réclamation</span>
 						</a>
                         <ul aria-expanded="false">
-                        <li><a href="Ajouterpostback.php">Ajouter Réclamation</a></li>
+                        <li><a href="Ajouterposttback.php">Ajouter Réclamation</a></li>
                             <li><a href="Afficherpostback.php">Afficher Réclamation </a></li>
                             <li><a href="Afficherreponseback.php">Afficher Réponse   </a></li>
                         </ul>

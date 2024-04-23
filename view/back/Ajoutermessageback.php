@@ -1,14 +1,14 @@
 ﻿<?php
-require "../../model/comment.php";
-require "../../controller/commentC.php";
+require "../../model/message.php";
+require "../../controller/messageC.php";
 
 
 
     $error = "";
     // create user
-    $comment = null;
+    $message = null;
     // create an instance of the controller
-    $commentC = new commentC();
+    $messageC = new messageC();
     if (
         isset($_POST['nom']) &&
         isset($_POST['email']) &&
@@ -21,13 +21,13 @@ require "../../controller/commentC.php";
             
             !empty($_POST["contenu"]) 
         ) {
-            $comment = new comment(
+            $message = new message(
                 $_POST['nom'],
                 $_POST['email'] ,
                
                 $_POST['contenu'] 
             );
-			$commentC->ajouter($comment);
+			$messageC->ajouter($message);
            
         }
         else
@@ -507,7 +507,7 @@ require "../../controller/commentC.php";
 											<div class="img_cont success">RU</div>
 											<div class="user_info">
 												<span>Perfection Simplified</span>
-												<p>Jame Smith commented on your status</p>
+												<p>Jame Smith messageed on your status</p>
 											</div>
 										</div>
 									</li>
@@ -618,7 +618,7 @@ require "../../controller/commentC.php";
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-                                Table comment
+                                Table message
                             </div>
 							
                         </div>
@@ -820,7 +820,7 @@ require "../../controller/commentC.php";
 		</div>
                     
         <!--**********************************
-            Header end ti-comment-alt
+            Header end ti-message-alt
         ***********************************-->
 
         <!--**********************************
@@ -943,11 +943,11 @@ require "../../controller/commentC.php";
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-table"></i>
-							<span class="nav-text">comment</span>
+							<span class="nav-text">message</span>
 						</a>
                         <ul aria-expanded="false">
-                        <li><a href="Ajoutercommentback.php">Ajouter comment</a></li>
-                            <li><a href="Affichercommentback.php">Afficher comment </a></li>
+                        <li><a href="Ajoutermessageback.php">Ajouter message</a></li>
+                            <li><a href="Affichermessageback.php">Afficher message </a></li>
                             <li><a href="Afficherpostback.php">Afficher post  </a></li>                        </ul>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
@@ -1004,7 +1004,7 @@ require "../../controller/commentC.php";
 				<div class="row page-titles">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">   Ajout du comment</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">   Ajout du message</a></li>
 					</ol>
                 </div>
                 <!-- row -->
@@ -1014,9 +1014,9 @@ require "../../controller/commentC.php";
     <div class="col-12">
       <div class="card recent-sales overflow-auto">
         <div class="card-body">
-          <h5 class="card-title">comments <span>| Ajout</span></h5>
+          <h5 class="card-title">messages <span>| Ajout</span></h5>
           <br>
-          <form method="POST" onsubmit="return verif();" action="Ajoutercommentback.php">
+          <form method="POST" onsubmit="return verif();" action="Ajoutermessageback.php">
             <div class="mb-5">
               <div class="row">
                 <div class="card-body" style="margin-left:50px;">

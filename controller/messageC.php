@@ -1,11 +1,11 @@
 <?php
 include_once 'config.php';
-include '../model/comment.php';
-class commentC
+include '../model/message.php';
+class messageC
 {
       public function afficher()
     {
-        $sql = "SELECT * FROM comment";
+        $sql = "SELECT * FROM message";
         $db = config::getConnexion();
         try {
             $liste = $db->query($sql);
@@ -14,43 +14,43 @@ class commentC
             die('Error:' . $e->getMessage());
         }
     } 
-    function ajouter($comment)
+    function ajouter($message)
     {
-        $sql = "INSERT INTO comment (nom, email ,contenu)
+        $sql = "INSERT INTO message (nom, email ,contenu)
         VALUES (:nom,:email, :contenu)";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
             $query->execute([
-                'nom' => $comment->getNom(),
-                'email' => $comment->getEmail(),
+                'nom' => $message->getNom(),
+                'email' => $message->getEmail(),
                 
-                'contenu' => $comment->getContenu()
+                'contenu' => $message->getContenu()
             ]);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
         }
     }
     
-    function recuperercomment($id){
-        $sql="SELECT * from comment where id=$id";
+    function recuperermessage($id){
+        $sql="SELECT * from message where id=$id";
         $conn = new config();
         $db=$conn->getConnexion();
         try{
             $query=$db->prepare($sql);
             $query->execute();
 
-            $comment=$query->fetch();
-            return $comment;
+            $message=$query->fetch();
+            return $message;
         }
         catch (Exception $e){
             die('Erreur: '.$e->getMessage());
         }
     }
    
-    function tricomment()
+    function trimessage()
     {
-        $sql = "SELECT * FROM comment order by nom";
+        $sql = "SELECT * FROM message order by nom";
         $db = config::getConnexion();
         try {
             $list = $db->query($sql);
@@ -59,9 +59,9 @@ class commentC
             die('Erreur: ' . $e->getMessage());
         }
     }
-    function recherchecomment($rech)
+    function recherchemessage($rech)
     {
-        $sql = "SELECT * FROM comment where comment.nom like '%$rech%' or comment.email like '%$rech%'  or comment.contenu like '%$rech%'";
+        $sql = "SELECT * FROM message where message.nom like '%$rech%' or message.email like '%$rech%'  or message.contenu like '%$rech%'";
         $db = config::getConnexion();
         try {
             $list = $db->query($sql);
@@ -72,13 +72,13 @@ class commentC
     }
  
    
-    function modifier($comment, $id)
+    function modifier($message, $id)
     {
         {
         try {
             $db = config::getConnexion();
             $query = $db->prepare(
-                'UPDATE comment SET 
+                'UPDATE message SET 
                     nom = :nom, 
                     email = :email,
                     
@@ -87,10 +87,10 @@ class commentC
             );
             $query->execute([
                 'id' => $id,
-                'nom' => $comment->getNom(),
-                'email' => $comment->getEmail(),
+                'nom' => $message->getNom(),
+                'email' => $message->getEmail(),
 
-                'contenu' => $comment->getContenu()
+                'contenu' => $message->getContenu()
             ]);
             echo $query->rowCount() . " records UPDATED successfully <br>";
         } catch (PDOException $e) {
@@ -99,7 +99,7 @@ class commentC
     }
     function supprimer($id)
     {
-        $sql = "DELETE FROM comment WHERE id = :id";
+        $sql = "DELETE FROM message WHERE id = :id";
         $db = config::getConnexion();
         $req = $db->prepare($sql);
         $req->bindValue(':id', $id);
@@ -111,9 +111,9 @@ class commentC
         }
     }
 
-    function count_comment(){
+    function count_message(){
 
-        $sql="SELECT count(id) FROM comment" ;
+        $sql="SELECT count(id) FROM message" ;
         $db = config::getConnexion();
         try{
             $query = $db->query($sql);

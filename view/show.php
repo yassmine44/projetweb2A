@@ -1,37 +1,15 @@
 <?php
-include_once '../controller/messageC.php';
-include_once '../model/message.php';
+require "../controller/commentC.php";
 
+$d = new commentC();
 
-    $error = "";
-    // create user
-    $message = null;
-    // create an instance of the controller
-    $messageC = new messageC();
-    if (
-        isset($_POST['nom']) &&
-        isset($_POST['email']) &&
-       
-        isset($_POST['contenu'])
-    ){
-        if (
-            !empty($_POST["nom"]) &&
-            !empty($_POST["email"]) &&
-           
-            !empty($_POST["contenu"]) 
-        ) {
-            $message = new message(
-                $_POST['nom'],
-                $_POST['email'] ,
-              
-                $_POST['contenu'] 
-            );
-			$messageC->ajouter($message);
-           
-        }
-        else
-            $error = "Missing information";
-   }
+if (isset($_POST["aff"]) == "Tri") {
+  $tab = $d->tricomment();
+} else if (isset($_POST["aff"] )== "Search") {
+  $tab = $d->recherchecomment($_POST["rech"]);
+} else
+  $tab = $d->afficher();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -94,7 +72,7 @@ include_once '../model/message.php';
                             <a href="#" class="dropdown-toggle text-light" data-bs-toggle="dropdown"><small><i class="fa fa-home me-2"></i> My Dashboard</small></a>
                             <div class="dropdown-menu rounded">
                                 <a href="#" class="dropdown-item"><i class="fas fa-user-alt me-2"></i> My Profile</a>
-                                <a href="#" class="dropdown-item"><i class="fas fa-message-alt me-2"></i> Inbox</a>
+                                <a href="#" class="dropdown-item"><i class="fas fa-comment-alt me-2"></i> Inbox</a>
                                 <a href="#" class="dropdown-item"><i class="fas fa-bell me-2"></i> Notifications</a>
                                 <a href="#" class="dropdown-item"><i class="fas fa-cog me-2"></i> Account Settings</a>
                                 <a href="#" class="dropdown-item"><i class="fas fa-power-off me-2"></i> Log Out</a>
@@ -163,8 +141,8 @@ include_once '../model/message.php';
         </div>
         <!-- Header End -->
 
-        <!-- message Start -->
-        <div class="container-fluid message bg-light py-5">
+        <!-- comment Start -->
+        <div class="container-fluid comment bg-light py-5">
             <div class="container py-5">
                 <div class="mx-auto text-center mb-5" style="max-width: 900px;">
                     <h5 class="section-title px-3">blog</h5>
@@ -319,42 +297,26 @@ include_once '../model/message.php';
                     </div>
                    </div>
                   </div>
-                    <div class="col-lg-8">
-
-                        <h3 class="mb-2">add ur message</h3>
-                        <p class="mb-4">"Nous comprenons l'importance de chaque réclamation et nous nous engageons à trouver une solution qui vous convienne."<a href="commentA.php">Report  Now</a>.</p>
-                        <form method="POST" onsubmit="return verif();">
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="nom"   name="nom" placeholder=" Name">
-                                        <label for="name"> Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control border-0"  name ="email" id="email" placeholder=" Email">
-                                        <label for="email"> Email</label>
-                                    </div>
-                                </div>
-                                
-                                
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control border-0" placeholder="Leave a message here"  name="contenu" id="contenu" style="height: 160px"></textarea>
-                                        <label for="message">contenu</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit" name="ajout" value="Ajouter" onsubmit="return verif()">Send message</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
+				  <section class="section dashboard">
+					<div class="row">
+					  <div class="col-12">
+						<div class="card recent-sales overflow-auto">
+						  <div class="card-body">
+							 
+							<h5 class="card-title">comments <span>| Affichage</span></h5>
+							<div class="table-responsive">
+							  <table class="table">
+								  
+								  <tbody>
+								  <?php foreach ($tab as $rec) { ?>
+									  
+								  <?php } ?>
+								  </tbody>
+							  </table>
+						
+						</div>
+					  </div>
+					</div>
         <!-- Contact End -->
 
         <!-- Subscribe Start -->
@@ -400,7 +362,7 @@ include_once '../model/message.php';
                             <a href=""><i class="fas fa-angle-right me-2"></i> offre d'emploi</a>
                             <a href=""><i class="fas fa-angle-right me-2"></i> Blog</a>
                             <a href=""><i class="fas fa-angle-right me-2"></i> communauté</a>
-                            <a href=""><i class="fas fa-angle-right me-2"></i> message</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> comment</a>
                             <a href=""><i class="fas fa-angle-right me-2"></i> Entretien</a>
                         </div>
                     </div>

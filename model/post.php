@@ -4,14 +4,14 @@ class post
 {
     private ?int $id = null;
     private ?string $date = null;
-    private ?string $description = null;
+    private ?string $nom = null;
    // private ?int $id_comment = null;
 
 
-    public function __construct($date, $description)
+    public function __construct($date, $nom)
     {
         $this->date = $date;
-        $this->description = $description;
+        $this->nom = $nom;
         //$this->id_comment = $id_comment;
     }
 
@@ -28,15 +28,15 @@ class post
     }
 
     
-    public function getDescription()
+    public function getnom()
     {
-        return $this->description;
+        return $this->nom;
     }
 
     
-    public function setDescription($description)
+    public function setnom($nom)
     {
-        $this->description = $description;
+        $this->nom = $nom;
 
         return $this;
     }

@@ -1,10 +1,10 @@
 <?php
 include_once 'config.php';
-include '../model/comment.php';
-include '../controller/commentC.php';
+include '../model/message.php';
+include '../controller/messageC.php';
 function supprimer($id)
     {
-        $sql = "DELETE FROM comment WHERE id = :id";
+        $sql = "DELETE FROM message WHERE id = :id";
         $db = config::getConnexion();
         $req = $db->prepare($sql);
         $req->bindValue(':id', $id);
@@ -19,7 +19,7 @@ function supprimer($id)
     
    
     supprimer($_GET["id"]);
-    header('Location:Affichercommentback.php');
+    header('Location:Affichermessageback.php');
     
     
     ?>
