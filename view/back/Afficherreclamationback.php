@@ -1061,6 +1061,9 @@ Affichage du Réclamations                            </div>
                           Générer PDF
                       </button> 
                   </form> 
+				  <button id="filterApprovedBtn" class="btn btn-outline-primary btn-sm">Afficher les clients approuvés</button>
+					<button id="resetFilterBtn" class="btn btn-outline-secondary btn-sm">Réinitialiser le filtre</button>
+
                 </div> 
             </div>
           </div>
@@ -1073,7 +1076,7 @@ Affichage du Réclamations                            </div>
               <h4 class="card-title">Statistiques des Réclamations et des Réponses</h4>
               <div class="col-lg-10 grid-margin stretch-card">
                 <div style="margin-left:250px;margin-top:50px;height:450;width:450px;">
-                    <canvas id="myChartt" width="400" height="400"></canvas>
+                 <center>  <canvas id="myChartt" width="400" height="400"></canvas></center> 
                 </div>
               </div>
             </div>
@@ -1149,6 +1152,49 @@ Affichage du Réclamations                            </div>
                     }
                 }
           });
+
+		  // Fonction pour filtrer et afficher uniquement les clients approuvés
+function filterApprovedClients() {
+    // Récupérer toutes les lignes du tableau
+    var rows = document.querySelectorAll(".table tbody tr");
+
+    // Parcourir chaque ligne
+    rows.forEach(function(row) {
+        // Récupérer la colonne d'état
+        var etatCell = row.querySelector("td:nth-child(5)");
+
+        // Vérifier si l'état est "Approved"
+        if (etatCell.textContent.trim() !== "Approved") {
+            // Masquer la ligne si l'état n'est pas "Approved"
+            row.style.display = "none";
+        } else {
+            // Afficher la ligne si l'état est "Approved"
+            row.style.display = "";
+        }
+    });
+}
+
+// Fonction pour réinitialiser le filtrage et afficher toutes les lignes
+function resetFilter() {
+    // Récupérer toutes les lignes du tableau
+    var rows = document.querySelectorAll(".table tbody tr");
+
+    // Afficher toutes les lignes
+    rows.forEach(function(row) {
+        row.style.display = "";
+    });
+}
+
+// Écouter les clics sur le bouton "Afficher les clients approuvés"
+document.getElementById("filterApprovedBtn").addEventListener("click", function() {
+    filterApprovedClients();
+});
+
+// Écouter les clics sur le bouton de réinitialisation du filtrage
+document.getElementById("resetFilterBtn").addEventListener("click", function() {
+    resetFilter();
+});
+
     </script>
 </body>
 </html>

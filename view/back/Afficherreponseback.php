@@ -8,7 +8,7 @@ $r = new reclamationC();
 
 if (isset($_POST["aff"]) == "Tri") {
   $tab = $d->triReponse();
-} else if (isset($_POST["aff"]) == "Search") {
+} else if (isset($_POST["affi"]) == "Search") {
   $tab = $d->rechercheReponse($_POST["rech"]);
 } else
   $tab = $d->afficher();
@@ -1025,7 +1025,7 @@ Liste de Réponses                            </div>
                     <form action="Afficherreponseback.php" method="POST">
                         <br>
                         <input type="text" placeholder="Search..." name="rech" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" >
-                        <input type="submit" class="btn btn-outline-info btn-sm" name="aff" value="Search" />
+                        <input type="submit" class="btn btn-outline-info btn-sm" name="affi" value="Search" />
                         <input type="submit" class="btn btn-outline-primary btn-sm" name="aff" value="Tri" />
                     </form>
                 </center>
