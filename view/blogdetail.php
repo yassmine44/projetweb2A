@@ -30,9 +30,13 @@ include_once '../model/comment.php';
            
         }
         else
+        
             $error = "Missing information";
    }
-?>
+?> 
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -168,161 +172,41 @@ include_once '../model/comment.php';
             <div class="container py-5">
                 <div class="mx-auto text-center mb-5" style="max-width: 900px;">
                     <h5 class="section-title px-3">blog</h5>
-                   
-                </div>
-              
-            
-                    <section id="blog" class="p_4">
-             <div class="container-xl">
-               <div class="blog_1 row">
-                <div class="col-md-3">
-                 <div class="blog_1l">
-                   <div class="blog_1l1 bg_border p-3">
-                    <hr class="line_1 mt-0">
-                    <h5 class="mb-4">ARCHIVES</h5>
-                    <h6 class="font_14"><a href="blog_detail.html"><i class="fa fa-circle-o me-1 col_pink font_8"></i> July 2019 <span class="pull-right">(12)</span></a></h6>
-                    <hr>
-                    <h6 class="font_14"><a href="blog_detail.html"><i class="fa fa-circle-o me-1 col_pink font_8"></i> May 2019 <span class="pull-right">(15)</span></a></h6>
-                    <hr>
-                    <h6 class="font_14"><a href="blog_detail.html"><i class="fa fa-circle-o me-1 col_pink font_8"></i> Sept 2019 <span class="pull-right">(10)</span></a></h6>
-                    <hr>
-                    <h6 class="font_14 mb-0"><a href="blog_detail.html"><i class="fa fa-circle-o me-1 col_pink font_8"></i> Jan 2019 <span class="pull-right">(14)</span></a></h6>
-                   </div>
-                   <div class="blog_1l1 bg_border p-3 mt-4">
-                    <hr class="line_1 mt-0">
-                    <h5 class="mb-3">RECENT POSTS</h5>
-                    <div class="blog_1l1i row">
-                     <div class="col-md-2 pe-0 col-2">
-                      <div class="blog_1l1il">
-                       <span class="font_8"><i class="fa fa-circle-o me-1 col_pink"></i></span>
-                      </div>
-                     </div>
-                     <div class="col-md-10 ps-0 col-10">
-                      <div class="blog_1l1ir">
-                       <p class="font_14 mb-1"><a href="blog_detail.html">Integer at diam gravida fringilla Nibh preti purus</a></p>
-                       <h6 class="font_14 mb-0">June 18, 2015</h6>
-                      </div>
-                     </div>
-                    </div><hr>
-                    <div class="blog_1l1i row">
-                     <div class="col-md-2 pe-0 col-2">
-                      <div class="blog_1l1il">
-                       <span class="font_8"><i class="fa fa-circle-o me-1 col_pink"></i></span>
-                      </div>
-                     </div>
-                     <div class="col-md-10 ps-0 col-10">
-                      <div class="blog_1l1ir">
-                       <p class="font_14 mb-1"><a href="blog_detail.html">Donec quis ex vel tincidunt</a></p>
-                       <h6 class="font_14 mb-0">June 18, 2015</h6>
-                      </div>
-                     </div>
-                    </div><hr>
-                    <div class="blog_1l1i row">
-                     <div class="col-md-2 pe-0 col-2">
-                      <div class="blog_1l1il">
-                       <span class="font_8"><i class="fa fa-circle-o me-1 col_pink"></i></span>
-                      </div>
-                     </div>
-                     <div class="col-md-10 ps-0 col-10">
-                      <div class="blog_1l1ir">
-                       <p class="font_14 mb-1"><a href="blog_detail.html">Integer at diam gravida fringilla Nibh preti purus</a></p>
-                       <h6 class="font_14 mb-0">June 18, 2015</h6>
-                      </div>
-                     </div>
-                    </div>
-                    
-                   </div>
-                   <div class="blog_1l1 bg_border p-3 mt-4">
-                    <hr class="line_1 mt-0">
-                    <h5 class="mb-4">CATEGORIES</h5>
-                    <h6 class="font_14"><a href="blog_detail.html"><i class="fa fa-circle-o me-1 col_pink font_8"></i> Audio <span class="pull-right">(12)</span></a></h6>
-                    <hr>
-                    <h6 class="font_14"><a href="blog_detail.html"><i class="fa fa-circle-o me-1 col_pink font_8"></i> Magazine <span class="pull-right">(03)</span></a></h6>
-                    <hr>
-                    <h6 class="font_14"><a href="blog_detail.html"><i class="fa fa-circle-o me-1 col_pink font_8"></i> News <span class="pull-right">(08)</span></a></h6>
-                    <hr>
-                    <h6 class="font_14"><a href="blog_detail.html"><i class="fa fa-circle-o me-1 col_pink font_8"></i> Photoshop <span class="pull-right">(12)</span></a></h6>
-                    <hr>
-                    <h6 class="font_14"><a href="blog_detail.html"><i class="fa fa-circle-o me-1 col_pink font_8"></i> Technical <span class="pull-right">(07)</span></a></h6>
-                    <hr>
-                    <h6 class="font_14"><a href="blog_detail.html"><i class="fa fa-circle-o me-1 col_pink font_8"></i> Uncategorized <span class="pull-right">(09)</span></a></h6>
-                    <hr>
-                    <h6 class="font_14 mb-0"><a href="blog_detail.html"><i class="fa fa-circle-o me-1 col_pink font_8"></i> Video <span class="pull-right">(04)</span></a></h6>
-                   </div>
-                   <div class="blog_1l1 bg_border p-3 mt-4">
-                    <hr class="line_1 mt-0">
-                    <h5 class="mb-4">Tags</h5>
-                    <ul class="mb-0">
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Analyze</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Audio</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Blog</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Business</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Creative</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Design</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Experiment</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">News</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Expertize</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Express</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Share</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Sustain</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Video</a></li>
-                    <li class="d-inline-block"><a class="d-block" href="blog_detail.html">Youtube</a></li>
-                   </ul>
-                   </div>
-                 </div>
-                </div>
                 <div class="col-md-9">
                  <div class="blog_1dt">
                   <div class="blog_1dt1">
                     <div class="blog_1ril clearfix position-relative">
                      <div class="blog_1ril1 clearfix">
                        <div class="grid clearfix">
+                        <center>
                               <figure class="effect-jazz mb-0">
-                                <a href="#"><img src="img/blog-1.jpg" height="480" class="w-100" alt="abc"></a>
+                                <a href="#"><img src="img/blog-3.jpg" height="480" class="w-100" alt="abc"></a>
                               </figure>
+                        </center>
                           </div>
                      </div>
-                     <div class="blog_1ril2 w-100 clearfix position-absolute top-0">
-                       <span class="d-inline-block fs-2 bg-white col_dark"><i class="fa fa-edit"></i></span>
+                     
+                    </div>
+</div>
+                   
+                     
+                    </div>
+                   </div>
+                  </div>
+                  <hr>
+     <section class="section novi-background section-lg text-center">
+        <div class="container">
+          <h3 class="wow-outer"><span class="wow slideInDown text-uppercase">comments</span></h3>
+          <!-- Owl Carousel-->
+          
                      </div>
-                    </div>
-                  </div>
-                  <div class="blog_1dt2 row mt-4">
-                   <div class="col-md-2">
-                    <div class="blog_1dt2l text-center">
-                     <h4>19 <br><hr class="line m-auto mt-2 mb-2"> MAY <hr class="line m-auto mt-2"> </h4>
-                    </div>
-                   </div>
-                   <div class="col-md-10">
-                    <div class="blog_1dt2r">
-                     <h5>INTEGER AT DIAM GRAVIDA FRINGILLA NIBH PRETI PURUS</h5>
-                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt nunc lorem, nec faucibus mi facilisis eget. Mauris laoreet, nisl id faucibus pellentesque, mi mi tempor enim, sit amet interdum felis nibh a leo. Donec efficitur velit ac nisi rutrum, eu ornare augue tristique. Vivamus accumsan nisl id massa finibus aliquet. Pellentesque blandit ut urna dignissim pulvinar. Aliquam in ultrices ante. Nam condimentum eleifend consectetur. Fusce quam nunc, bibendum eget venenatis a, volutpat at ligula. Ut interdum elit vel ante tincidunt mattis. Aenean dignissim vulputate justo, sed tincidunt sapien laoreet a. Fusce vehicula, turpis sed hendrerit gravida, ante justo accumsan nisi, non congue metus risus a lorem.</p>
-                     <p>Quisque eleifend velit id metus ullamcorper tristique. Integer vel commodo ex. Pellentesque sed ultrices tellus. Integer lobortis et lorem vitae ullamcorper.</p>
-                     <blockquote class="blockquote bg_gray p-4 pt-3 mt-4">
-                                                <p>Provident fugiat tempora architecto mollitia quos maiores perspiciatis obcaecati placeat aunty koi thako Architecto eaque accusamus minima in earum impedit atque</p>
-                                                <h6 class="fw-normal mb-0"><strong>- Dapibus Diam </strong>of Google Inc.</h6>
-                                            </blockquote>
-                     <p>It was popularised in the 1980s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including text are in so Ipsum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation quis nostrud exercitation quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt iest laborum.</p>
-                     <ul>
-                      <li class="d-inline-block me-3"><a href="#"><i class="fa fa-tag me-1 col_pink"></i> Blog</a></li>
-                      <li class="d-inline-block me-3"><a href="#"><i class="fa fa-tag me-1 col_pink"></i> Creative</a></li>
-                      <li class="d-inline-block me-3"><a href="#"><i class="fa fa-tag me-1 col_pink"></i> Business</a></li>
-                      <li class="d-inline-block"><a href="#"><i class="fa fa-tag me-1 col_pink"></i> News</a></li>
-                     </ul>
-                     <ul class="social-network social-circle mb-0 mt-3">
-                                <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-skype"></i></a></li>
-                                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-instagram"></i></a></li>
-                                <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                    </div>
-                   </div>
-                  </div>
-                    <div class="col-lg-8">
+    </section>
+
+
 
                         <h3 class="mb-2">add ur comment</h3>
-                        <p class="mb-4">"Nous comprenons l'importance de chaque réclamation et nous nous engageons à trouver une solution qui vous convienne."<a href="commentA.php">Report  Now</a>.</p>
+                        <input type="hidden" name="id_post" value="id_post">
+                       
                         <form method="POST" onsubmit="return verif();">
                             <div class="row g-3">
                                 <div class="col-md-6">
@@ -347,6 +231,7 @@ include_once '../model/comment.php';
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" type="submit" name="ajout" value="Ajouter" onsubmit="return verif()">Send comment</button>
+
                                 </div>
                             </div>
                         </form>

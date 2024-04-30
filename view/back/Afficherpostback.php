@@ -6,7 +6,7 @@ $d = new postC();
 
 if (isset($_POST["aff"]) == "Tri") {
   $tab = $d->tripost();
-} else if (isset($_POST["aff"] )== "Search") {
+} else if (isset($_POST["affi"] )== "Search") {
   $tab = $d->recherchepost($_POST["rech"]);
 } else
   $tab = $d->afficher();
@@ -596,7 +596,7 @@ if (isset($_POST["aff"]) == "Tri") {
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-Affichage du Réclamations                            </div>
+Affichage du post                            </div>
 							
                         </div>
                         <ul class="navbar-nav header-right">
@@ -920,11 +920,11 @@ Affichage du Réclamations                            </div>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-table"></i>
-							<span class="nav-text">Réclamation</span>
+							<span class="nav-text">post</span>
 						</a>
                         <ul aria-expanded="false">
-                        <li><a href="Ajouterpostback.php">Ajouter Réclamation</a></li>
-                            <li><a href="Afficherpostback.php">Afficher Réclamation </a></li>
+                        <li><a href="Ajouterpostback.php">Ajouter post</a></li>
+                            <li><a href="Afficherpostback.php">Afficher post </a></li>
                             <li><a href="Afficherreponseback.php">Afficher Réponse   </a></li>
                         </ul>
                     </li>
@@ -985,11 +985,11 @@ Affichage du Réclamations                            </div>
                 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Réclamations</h1>
+      <h1>post</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="AjouterpostBack.php">Home</a></li>
-          <li class="breadcrumb-item">Réclamations</li>
+          <li class="breadcrumb-item">post</li>
           <li class="breadcrumb-item active">Affichage</li>
         </ol>
       </nav>
@@ -1004,11 +1004,11 @@ Affichage du Réclamations                            </div>
                     <form action="Afficherpostback.php" method="POST">
                         <br>
                         <input type="text" placeholder="Search..." name="rech" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" >
-                        <input type="submit" class="btn btn-outline-info btn-sm" name="aff" value="Search" />
+                        <input type="submit" class="btn btn-outline-info btn-sm" name="affi" value="Search" />
                         <input type="submit" class="btn btn-outline-primary btn-sm" name="aff" value="Tri" />
                     </form>
                 </center>
-              <h5 class="card-title">Réclamations <span>| Affichage</span></h5>
+              <h5 class="card-title">post <span>| Affichage</span></h5>
               <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -1057,7 +1057,7 @@ Affichage du Réclamations                            </div>
         <div class="col-12 grid-margin">
           <div class="card">
             <div class="card-body" >
-              <h4 class="card-title">Statistiques des Réclamations et des Réponses</h4>
+              <h4 class="card-title">Statistiques des post et des Réponses</h4>
               <div class="col-lg-10 grid-margin stretch-card">
                 <div style="margin-left:250px;margin-top:50px;height:450;width:450px;">
                     <canvas id="myChartt" width="400" height="400"></canvas>
@@ -1113,7 +1113,7 @@ Affichage du Réclamations                            </div>
 	<script src="js/demo.js"></script>
     <script src="js/styleSwitcher.js"></script>
 	<script>
-      var xValues = ["Réclamations avec reponses","Réclamations sans reponses"];
+      var xValues = ["post avec reponses","post sans reponses"];
       var yValues = [<?php echo $d->count_AvecReponse();?>, <?php echo $d->count_post()-$d->count_AvecReponse();?>];
       var barColors = [
               "#0d6efd",
@@ -1132,7 +1132,7 @@ Affichage du Réclamations                            </div>
                 options: {
                     title: {
                     display: true,
-                    text: "Réclamations - Réponses"
+                    text: "post - Réponses"
                     }
                 }
           });

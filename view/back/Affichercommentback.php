@@ -6,7 +6,7 @@ $d = new commentC();
 
 if (isset($_POST["aff"]) == "Tri") {
   $tab = $d->tricomment();
-} else if (isset($_POST["aff"] )== "Search") {
+} else if (isset($_POST["affi"] )== "Search") {
   $tab = $d->recherchecomment($_POST["rech"]);
 } else
   $tab = $d->afficher();
@@ -1004,7 +1004,7 @@ Affichage du comments                            </div>
                     <form action="Affichercommentback.php" method="POST">
                         <br>
                         <input type="text" placeholder="Search..." name="rech" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" >
-                        <input type="submit" class="btn btn-outline-info btn-sm" name="aff" value="Search" />
+                        <input type="submit" class="btn btn-outline-info btn-sm" name="affi" value="Search" />
                         <input type="submit" class="btn btn-outline-primary btn-sm" name="aff" value="Tri" />
                     </form>
                 </center>
@@ -1030,6 +1030,7 @@ Affichage du comments                            </div>
                             <td> <?= $rec['contenu'] ?> </td>
                             <td>
                                 <a href="modifiercommentback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
+								<a href="mailing.php?id=<?php echo $rec['email']; ?>"><button class="btn btn-outline-danger btn-sm">send_mail</button></a><br><br>
                                 <a href="delete.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a><br><br>
                                
                             </td>

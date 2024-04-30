@@ -38,7 +38,7 @@ class postC
             $query->execute([
                 'date' => $post->getDate(),
                 'description' => $post->getDescription(),
-                
+             
             ]);
         } catch (Exception $e) {
             echo 'Error: ' . $e->getMessage();
@@ -51,13 +51,15 @@ class postC
             $query = $db->prepare(
                 'UPDATE post SET 
                     date = :date, 
-                    description = :description
+                    description = :description,
+                 
                 WHERE id= :id'
             );
             $query->execute([
                 'id' => $id,
                 'date' => $post->getDate(),
-                'description' => $post->getDescription()
+                'description' => $post->getDescription(),
+               
                 
             ]);
             echo $query->rowCount() . " records UPDATED successfully <br>";

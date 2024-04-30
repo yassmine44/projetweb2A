@@ -1,3 +1,17 @@
+<?php
+include_once "../controller/postC.php";
+include_once "../model/post.php";
+
+$d = new postC();
+
+if (isset($_POST["aff"]) == "Tri") {
+  $tab = $d->tripost();
+} else if (isset($_POST["aff"] )== "Search") {
+  $tab = $d->recherchepost($_POST["rech"]);
+} else
+  $tab = $d->afficher();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -128,143 +142,67 @@
         </div>
         <!-- Header End -->
 
-        <!-- Blog Start -->
-        <div class="container-fluid blog py-5">
-            <div class="container py-5">
-                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                    <h5 class="section-title px-3">Our Blog</h5>
-                    <h1 class="mb-4">Apercu du Blog</h1>
-                    <p class="mb-0">Whatever you’re publishing. Whoever your audience is. WordPress.com makes designing, editing, and sharing your work as simple as drag, drop, and click.
-
-                        Start your blog
-                    </p>
-                </div>
-                <div class="col-md-9">
-                    <div class="blog_1r">
-                     <div class="blog_1ri row">
-                      <div class="col-md-7">
-                       <div class="blog_1ril clearfix position-relative">
-                        <div class="blog_1ril1 clearfix">
-                          <div class="grid clearfix">
-                                 <figure class="effect-jazz mb-0">
-                                   <a href="blog_detail.html"><img src="img/blog-3.jpg" class="w-100" alt="abc"></a>
-                                 </figure>
-                             </div>
-                        </div>
-                        <div class="blog_1ril2 w-100 clearfix position-absolute  text-end">
-                            <span class="d-inline-block fs-2 bg-white col_dark"><i class="fa fa-edit"></i></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="blog_1rir ps-4 pe-3">
-                      <h5 class="mb-4"><a href="blog_detail.html">INTEGER AT DIAM GRAVIDA FRINGILLA NIBH PRETI PURUS</a></h5>
-                      <p class="font_14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt nunc lorem, nec faucibus mi facilisis eget. Mauris laoreet, nisl id faucibus pellentesque, mi mi tempor enim, sit amet interdum felis nibh a leo....</p>
-                      <h6 class="font_14 mb-0 mt-4"><a class="button p-3 pt-2 pb-2" href="blog_detail.html">READ MORE</a></h6>
-                    </div>
-                   </div>
-                </div>
-                <div class="blog_1ri row mt-4">
-                    <div class="col-md-7">
-                     <div class="blog_1ril clearfix position-relative">
-                      <div class="blog_1ril1 clearfix">
-                        <div class="grid clearfix">
-                               <figure class="effect-jazz mb-0">
-                                 <a href="blog_detail.html"><img src="img/blog-2.jpg" class="w-100" alt="abc"></a>
-                               </figure>
-                           </div>
-                      </div>
-                      <div class="blog_1ril2 w-100 clearfix position-absolute  text-end">
-                        <span class="d-inline-block fs-2 bg-white col_dark"><i class="fa fa-edit"></i></span>
-                     </div>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="blog_1rir ps-4 pe-3">
-                      <h5 class="mb-4"><a href="blog_detail.html">INTEGER AT DIAM GRAVIDA FRINGILLA NIBH PRETI PURUS</a></h5>
-                      <p class="font_14">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tincidunt nunc lorem, nec faucibus mi facilisis eget. Mauris laoreet, nisl id faucibus pellentesque, mi mi tempor enim, sit amet interdum felis nibh a leo....</p>
-                      <h6 class="font_14 mb-0 mt-4"><a class="button p-3 pt-2 pb-2" href="blog_detail.html">READ MORE</a></h6>
-                    </div>
-                </div>
-                </div>
-<br>
-                <div class="row g-4 justify-content-center">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <div class="blog-img-inner">
-                                    <img class="img-fluid w-100 rounded-top" src="img/blog-3.jpg" alt="Image">
-                                    <div class="blog-icon">
-                                        <a href="createblog.html" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
+       <!-- Blog Start -->
+<div class="container-fluid blog py-5">
+    <div class="container py-5">
+        <div class="mx-auto text-center mb-5" style="max-width: 900px;">
+            <h5 class="section-title px-3">Our Blog</h5>
+            <h1 class="mb-4">Apercu du Blog</h1>
+            <p class="mb-0">Whatever you’re publishing. Whoever your audience is. WordPress.com makes designing, editing, and sharing your work as simple as drag, drop, and click.
+                Start your blog
+            </p>
+        </div>
+        <div class="col-md-9">
+            <?php foreach ($tab as $rec) { ?>
+                <div class="blog_1r">
+                    <div class="blog_1ri row">
+                        <div class="col-md-7">
+                            <div class="blog_1ril clearfix position-relative">
+                                <div class="blog_1ril1 clearfix">
+                                    <div class="grid clearfix">
+                                        <figure class="effect-jazz mb-0">
+                                            <a href="blogdetail.php"><img src="img/blog-3.jpg" class="w-100" alt="abc"></a>
+                                        </figure>
                                     </div>
                                 </div>
-                                <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
-                                    
-                                    <a href="#" class="btn-hover flex-fill text-center text-white py-2"><i class="fa fa-copyright text-primary me-2"></i>1K</a>
+                                <div class="blog_1ril2 w-100 clearfix position-absolute  text-end">
+                                    <span class="d-inline-block fs-2 bg-white col_dark"><i class="fa fa-edit"></i></span>
                                 </div>
                             </div>
-                            <div class="blog-content border border-top-0 rounded-bottom p-4">
-                               
-                                <a href="createblog.html" class="h4">ECRIRE UN ARTICLE DE BLOG</a>
-                                <hr>
-                                <a href="createblog.html" class="btn btn-primary rounded-pill py-2 px-4"> More</a>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="blog_1rir ps-4 pe-3">
+                                <h5 class="mb-4"><a href="blogdetail.php"><?= $rec['date'] ?></a></h5>
+                                <p class="font_14"><?= $rec['description'] ?></p>
+                                <h6 class="font_14 mb-0 mt-4"><a class="button p-3 pt-2 pb-2" href="blogdetail.php">READ MORE</a></h6>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="blog-item">
-                            <div class="blog-img">
-                                <div class="blog-img-inner">
-                                    <img class="img-fluid w-100 rounded-top" src="img/blog-2.jpg" alt="Image">
-                                    <div class="blog-icon">
-                                        <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
-                                    </div>
-                                </div>
-                                <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
-                                    
-                                    <a href="#" class="btn-hover flex-fill text-center text-white py-2"><i class="fa fa-comments text-primary me-2"></i>1K</a>
-                                </div>
-                            </div>
-                            <div class="blog-content border border-top-0 rounded-bottom p-4">
-                               
-                                <a href="comment.html" class="h4">GERER LES COMMENTAIRES</a>
-                                <hr>
-
-                                <a href="comment.html" class="btn btn-primary rounded-pill py-2 px-4"> More</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row g-4 justify-content-center">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="blog-item">
-                                <div class="blog-img">
-                                    <div class="blog-img-inner">
-                                        <img class="img-fluid w-100 rounded-top" src="img/blog-1.jpg" alt="Image">
-                                        <div class="blog-icon">
-                                            <a href="#" class="my-auto"><i class="fas fa-link fa-2x text-white"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="blog-info d-flex align-items-center border border-start-0 border-end-0">
-                                        
-                                        <a href="#" class="btn-hover flex-fill text-center text-white py-2"><i class="fa fa-copyright text-primary me-2"></i>1K</a>
-                                    </div>
-                                </div>
-                                <div class="blog-content border border-top-0 rounded-bottom p-4">
-                                   
-                                    <a href="post.html" class="h4">gerer les posts </a>
-                                    <hr>
-                                    <a href="post.html" class="btn btn-primary rounded-pill py-2 px-4"> More</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                   
-                            </div>
-                        </div>
+                </div>
+            <?php } ?>
+        </div>
+        <br>
+        <div class="row g-4 justify-content-center">
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-item">
+                    <!-- Rest of the code for the first blog item -->
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="blog-item">
+                    <!-- Rest of the code for the second blog item -->
+                </div>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6">
+                    <div class="blog-item">
+                        <!-- Rest of the code for the third blog item -->
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+</div>
         <!-- Blog End -->
 
         <!-- Subscribe Start -->

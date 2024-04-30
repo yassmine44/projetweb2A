@@ -5,13 +5,16 @@ class post
     private ?int $id = null;
     private ?string $date = null;
     private ?string $description = null;
+
+    //private ?string $img = null;
    // private ?int $id_comment = null;
 
 
-    public function __construct($date, $description)
+    public function __construct($date, $description,$img)
     {
         $this->date = $date;
         $this->description = $description;
+        $this->img = $img;
         //$this->id_comment = $id_comment;
     }
 

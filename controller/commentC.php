@@ -139,7 +139,24 @@ class commentC
             die('Erreur: '.$e->getMessage());
         }   
     }
+    function affichernotif1()
+        {
+            $sql="SELECT utilisateur.nom , utilisateur.prenom,restaurantt.nom,notificationn.id
+            FROM notificationn INNER JOIN  utilisateur ON
+            utilisateur.id = notificationn.idclient 
+            INNER JOIN  restaurantt ON
+            restaurantt.num = notificationn.num  " ;
+            $db = config::getConnexion();
+            try{
+                $liste = $db->query($sql);
+                return $liste;
+            }
+            catch (Exception $e){
+                die('Erreur: '.$e->getMessage());
+            }   
+        }
 
 }
 }
+
 ?>
