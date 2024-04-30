@@ -1,6 +1,6 @@
 <?PHP
-	include "../config.php";
-	require_once '../model/event.php';
+require_once(__DIR__ . '/../config.php');
+require_once(__DIR__ . '/../model/event.php');
 
 	class eventC {
 		
@@ -147,8 +147,150 @@
 				die('Erreur: '.$e->getMessage());
 			}
 		}
+    	
+			function triByExp($direction){
+				$sql = "SELECT * FROM offre ORDER BY IDoffre $direction";
+				$db = config::getConnexion();
+				try{
+					$liste = $db->query($sql);
+					return $liste;
+				}
+				catch (Exception $e){
+					die('Erreur: '.$e->getMessage());
+				}            
+			}
+		
+			function recherche($titreoffre){
+				$sql = "SELECT * 
+						FROM offre
+						WHERE titreoffre LIKE '%" . $titreoffre . "%'";
+				$db = config::getConnexion();
+				try{
+					$liste = $db->query($sql);
+					return $liste;
+				}
+				catch (Exception $e){
+					die('Erreur: ' . $e->getMessage());
+				}            
+			}
+			function triByExpr($direction){
+				$sql = "SELECT * FROM offre ORDER BY salaire $direction";
+				$db = config::getConnexion();
+				try{
+					$liste = $db->query($sql);
+					return $liste;
+				}
+				catch (Exception $e){
+					die('Erreur: '.$e->getMessage());
+				}            
+			}
+		
+			function recherchepr($titreoffre){
+				$sql = "SELECT DISTINCT * 
+						FROM offre
+						WHERE titreoffre LIKE '%" . $titreoffre . "%'";
+				$db = config::getConnexion();
+				try {
+					$liste = $db->query($sql);
+					return $liste;
+				} catch (Exception $e) {
+					die('Erreur: ' . $e->getMessage());
+				}            
+			}			
+
+					function getExpiringOffers() {
+    $currentDate = date('Y-m-d');
+    
+    $sql = "SELECT * FROM offre WHERE datelimit < :currentDate";
+    $db = config::getConnexion();
+    try {
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(':currentDate', $currentDate);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        die('Erreur: ' . $e->getMessage());
+    }
+				
+					function filterEvents($filterCriteria) {
+						$sql = "SELECT * FROM offre WHERE 1";
+					
+						// Add conditions based on filter criteria
+						if (!empty($filterCriteria['titreoffre'])) {
+							$sql .= " AND titreoffre LIKE :titreoffre";
+						}
+					
+						// Add similar conditions for other fields...
+					
+						// Prepare SQL statement
+						$db = config::getConnexion();
+						$stmt = $db->prepare($sql);
+					
+						// Bind parameter values
+						if (!empty($filterCriteria['titreoffre'])) {
+							$stmt->bindValue(':titreoffre', '%' . $filterCriteria['titreoffre'] . '%');
+						}
+					
+						// Bind similar values for other fields...
+					
+						// Execute SQL query
+						try {
+							$stmt->execute();
+							$filteredEvents = $stmt->fetchAll(PDO::FETCH_ASSOC);
+							return $filteredEvents;
+						} catch (Exception $e) {
+							die('Erreur: ' . $e->getMessage());
+						}
+					}
+					}
+					public static function calculateAverageSalary()
+					{
+						$sql = "SELECT AVG(salaire) AS average_salary FROM offre";
+						$db = config::getConnexion();
+						try {
+							$stmt = $db->query($sql);
+							$result = $stmt->fetch(PDO::FETCH_ASSOC);
+							return $result['average_salary'];
+						} catch (Exception $e) {
+							die('Erreur: '.$e->getMessage());
+						}
+					}
+				
+					public static function countEvents()
+					{
+						$sql = "SELECT COUNT(*) AS event_count FROM offre";
+						$db = config::getConnexion();
+						try {
+							$stmt = $db->query($sql);
+							$result = $stmt->fetch(PDO::FETCH_ASSOC);
+							return $result['event_count'];
+						} catch (Exception $e) {
+							die('Erreur: '.$e->getMessage());
+						}
+					}
+				
+					public static function getMaxSalary()
+					{
+						$sql = "SELECT MAX(salaire) AS max_salary FROM offre";
+						$db = config::getConnexion();
+						try {
+							$stmt = $db->query($sql);
+							$result = $stmt->fetch(PDO::FETCH_ASSOC);
+							return $result['max_salary'];
+						} catch (Exception $e) {
+							die('Erreur: '.$e->getMessage());
+						}
+					}
+			
+			
+			
+		
 		
 	}
 
+		
+		
+	
+	
+
 ?>
-ccc

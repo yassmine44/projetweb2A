@@ -250,6 +250,7 @@
 					  </thead>
 						<?php
 foreach($listeEvent as $event){
+  
 ?>
 <tr>
     <td><?PHP echo $event['IDoffre']; ?></td>
@@ -262,11 +263,12 @@ foreach($listeEvent as $event){
         <?php
         // Check if image data exists
         if (!empty($event['image'])) {
-            // Display the image
-            echo '<img src="../' . base64_encode($event['image']) . '" style="max-width: 100px; max-height: 100px;" />';
-        } else {
-            echo 'No Image';
-        }
+          // Display the image
+          echo '<img src="/5555c/FrontAssets/images/' . $event['image'] . '" style="max-width: 100px; max-height: 100px;" />';
+      } else {
+          echo 'No Image';
+      }
+      
         ?>
     </td>
     <td>
@@ -320,4 +322,3 @@ foreach($listeEvent as $event){
     <!-- End custom js for this page-->
   </body>
 </html>
-rrrrrrrrr

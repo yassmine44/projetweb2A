@@ -1,20 +1,20 @@
 <?PHP
 	class Affectation_event_to_client{
 		private  $IDAffectation = null;
-		private  $EvenementFK = null;
+		private  $offreFK = null;
 		private  $ClientFK = null;
 		
-		function __construct($EvenementFK, $ClientFK){
+		function __construct($offreFK, $ClientFK){
 			
-			$this->EvenementFK=$EvenementFK;
+			$this->offreFK=$offreFK;
 			$this->ClientFK=$ClientFK;
 		}
 		
 		function getIDAffectation(){
 			return $this->IDAffectation;
 		}
-		function getEvenementFK(){
-			return $this->EvenementFK;
+		function getoffreFK(){
+			return $this->offreFK;
 		}
 		function getClientFK(){
 			return $this->ClientFK;
@@ -23,8 +23,8 @@
 		function setIDAffectation( $IDAffectation){
 			$this->IDAffectation=$IDAffectation;
 		}
-		function setEvenementFK($EvenementFK){
-			$this->EvenementFK;
+		function setoffreFK($offreFK){
+			$this->offreFK;
 		}
 		function setClientFK($ClientFK){
 			$this->ClientFK;

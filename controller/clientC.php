@@ -1,12 +1,12 @@
-<?PHP
-	include "../config.php";
-	require_once '../model/client.php';
+<?php
+require_once(__DIR__ . '/../config.php');
+require_once(__DIR__ . '/../model/client.php');
 	
 	class clientC {
 		
 		function ajouterclient($client){
-			$sql="INSERT INTO client (nom, prenom, email, login, password) 
-			VALUES (:nom,:prenom,:email, :login, :password)";
+			$sql="INSERT INTO client (nom, prenom, email, login, password, cv,exp) 
+			VALUES (:nom,:prenom,:email, :login, :password, :cv, :exp)";
 			$db = config::getConnexion();
 			try{
 				$query = $db->prepare($sql);
@@ -16,7 +16,9 @@
 					'prenom' => $client->getPrenom(),
 					'email' => $client->getEmail(),
 					'login' => $client->getLogin(),
-					'password' => $client->getPassword()
+					'password' => $client->getPassword(),
+					'cv' => $client->getCv(),
+					'exp' => $client->getExp()
 				]);			
 			}
 			catch (Exception $e){
@@ -58,7 +60,9 @@
 						prenom = :prenom,
 						email = :email,
 						login = :login,
-						password = :password
+						password = :password,
+						cv = :cv,
+						exp = :exp
 					WHERE id = :id'
 				);
 				$query->execute([
@@ -67,6 +71,8 @@
 					'email' => $client->getEmail(),
 					'login' => $client->getLogin(),
 					'password' => $client->getPassword(),
+					'cv' => $client->getCv(),
+					'exp' => $client->getExp(),
 					'id' => $id
 				]);
 			
@@ -139,10 +145,82 @@
 			return $message;
 		}
 		
-
+			function triByExp($direction){
+				$sql = "SELECT id, nom, prenom, email, login, password, cv, exp
+						FROM client
+						ORDER BY exp $direction";
+				$db = config::getConnexion();
+				try{
+					$liste = $db->query($sql);
+					return $liste;
+				}
+				catch (Exception $e){
+					die('Erreur: '.$e->getMessage());
+				}            
+			}
 		
-	
 		
-	}
+		
 
+		function recherche($login){
+			$sql = "SELECT id, nom, prenom, email, login, password, cv, exp
+					FROM client
+					WHERE login LIKE '%" . $login . "%'";
+			$db = config::getConnexion();
+			try{
+				$liste = $db->query($sql);
+				return $liste;
+			}
+			catch (Exception $e){
+				die('Erreur: ' . $e->getMessage());
+			}            
+		}
+		// Inside clientC class
+		public function ajouterclientWithOffer($client, $selected_offer_id, $pdo) {
+			// Insert client information into the client table
+			$query = "INSERT INTO client (nom, prenom, email, login, password, cv, exp) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			$stmt = $pdo->prepare($query);
+			$stmt->execute([$client->getNom(), $client->getPrenom(), $client->getEmail(), $client->getLogin(), $client->getPassword(), $client->getCv(), $client->getExp()]);
+		
+			// Retrieve the ID of the inserted client
+			$client_id = $pdo->lastInsertId();
+		
+			// Insert the client ID and the selected offer ID into the affectationeventtoclient table
+			$query = "INSERT INTO affectationeventtoclient (OffreFK, ClientFK) VALUES (?, ?)";
+			$stmt = $pdo->prepare($query);
+			$stmt->execute([$selected_offer_id, $client_id]);
+		}
+		
+		
+		public function getAllParticipants($pdo) {
+			// Query to fetch all participants with their IDs and all data
+			$query = "SELECT c.*, a.OffreFK, a.ClientFK FROM client c INNER JOIN affectationeventtoclient a ON c.id = a.ClientFK";
+			$stmt = $pdo->prepare($query);
+			$stmt->execute();
+			
+			// Fetch all rows
+			$participants = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
+			return $participants;
+		}
+		 public static function getClientCountByContractType() {
+        $sql = "SELECT o.typecontrat, COUNT(*) AS client_count
+                FROM client c
+                INNER JOIN affectationeventtoclient a ON c.id = a.ClientFK
+                INNER JOIN offre o ON a.OffreFK = o.IDoffre
+                GROUP BY o.typecontrat";
+        
+        // Assuming config class with getConnexion method to get database connection
+        $db = config::getConnexion();
+        
+        try {
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $result;
+        } catch (Exception $e) {
+            die('Erreur: ' . $e->getMessage());
+        }
+    }
+}
 ?>

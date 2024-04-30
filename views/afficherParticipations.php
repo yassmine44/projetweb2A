@@ -105,12 +105,12 @@
             <div class="product-item">
               <a href="package-details.html"><image  src="<?PHP echo "uploads/" . $event['image']; ?>"/></a>
               <div class="down-content">
-                <a href="package-details.html"><h4><?PHP echo $event['NomEvenement']; ?></h4></a>
-                <h6><?PHP echo $event['prixEvenement']; ?> DT</h6>
+                <a href="package-details.html"><h4><?PHP echo $event['titreoffre']; ?></h4></a>
+                <h6><?PHP echo $event['typecontrat']; ?> DT</h6>
                 <p>Zid colonne Description mta evenemment w 9dh idoum</p>
                 <small>
-                     <strong title="Available"><i class="fa fa-calendar"></i> <?PHP echo $event['dateEvenement']; ?> </strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                     <strong title="Flight included"><i class="fa fa-plane"></i> <?PHP echo $event['destinationEvenement']; ?></strong>
+                     <strong title="Available"><i class="fa fa-calendar"></i> <?PHP echo $event['datelimit']; ?> </strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                     <strong title="Flight included"><i class="fa fa-plane"></i> <?PHP echo $event['salaire']; ?></strong>
                 </small>
               </div>
             </div>
@@ -230,4 +230,3 @@
   </body>
 
 </html>
-rrrrrrrrrrr

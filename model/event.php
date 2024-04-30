@@ -61,5 +61,6 @@
 		function setimage($image){
 			$this->image=$image;
 		}
+		
 	}
 ?>
