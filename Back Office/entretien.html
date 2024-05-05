@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord de Gestion des Entretiens</title>
+    <!-- Lien vers votre fichier CSS -->
+<!-- Style css -->
+<link href="css/style.css" rel="stylesheet">
+<style></style>
+</head>
+<body>
+    <header>
+        
+        <h1>Tableau de Bord de Gestion des Entretiens</h1>
+    </header>
+    <section id="overview">
+        <h2>Vue d'ensemble</h2>
+        <p>Nombre total de postes ouverts : <span id="total-jobs">15</span></p>
+        <p>Nombre total de candidats : <span id="total-candidates">150</span></p>
+        <p>Nombre d'entretiens prévus cette semaine : <span id="total-interviews">20</span></p>
+        <p>Taux de réussite des entretiens : <span id="success-rate">75%</span></p>
+    </section>
+    <section id="calendar">
+        <h2>Calendrier des Entretiens</h2>
+        <!-- Calendrier des entretiens -->
+        <div id="interview-calendar"></div>
+    </section>
+    <section id="candidate-stats">
+        <h2>Statistiques des Candidats</h2>
+        <!-- Graphiques et statistiques des candidats -->
+        <div id="candidate-chart"></div>
+    </section>
+    <section id="candidate-tracking">
+        <h2>Suivi des Candidats</h2>
+        <!-- Tableau de suivi des candidats -->
+        <table id="candidate-table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Poste</th>
+                    <th>Étape du Processus</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Les données des candidats seront ajoutées ici dynamiquement -->
+            </tbody>
+        </table>
+    </section>
+    <section id="interview-feedback">
+        <h2>Feedback des Entretiens</h2>
+        <!-- Formulaires et commentaires de feedback des entretiens -->
+        <div id="interview-feedback-form"></div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Tableau de Bord de Gestion des Entretiens</p>
+    </footer>
+    <!-- Lien vers votre fichier JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
