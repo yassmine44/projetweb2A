@@ -33,14 +33,14 @@ class entretienC
     }
 
 
-      function ajouterEntretien($entretien){
+    function ajouterEntretien($entretien){
         $sql="INSERT INTO entretien 
-        VALUES (:IDE ,:nom, :email, :titreposte,:daterdv, :langue,:format ,:numtel)";
+        VALUES (:IDE ,:nom, :email, :titreposte,:daterdv, :langue,:format ,:numtel,'en attente')";
 
         $db = config::getConnexion();
         try {
-                $query = $db->prepare($sql);
-                $query->execute([
+            $query = $db->prepare($sql);
+            $query->execute([
                 'IDE' => $entretien->getIDE(),
                 'nom' => $entretien->getNom(),
                 'email' => $entretien->getEmail(),
@@ -49,11 +49,69 @@ class entretienC
                 'langue' => $entretien->getLangue(),
                 'format' => $entretien->getFormat(),
                 'numtel' => $entretien->getNumtel(),
-                ]);
+            ]);
+
+            // Envoyer l'e-mail de confirmation
+            $this->sendConfirmationEmail($entretien->getEmail());
+
+            echo 'Entretien ajouté avec succès!';
+
         } catch (Exception $e) {
             echo "Erreur: " . $e->getMessage();
         }
+    }
+
+    function sendConfirmationEmail($email) {
+        // Inclure la bibliothèque PHPMailer
+        require 'C:/xampp/htdocs/gestionentretien/view/mail/PHPMailer/PHPMailerAutoload.php';
+
+        // Créer une nouvelle instance de PHPMailer
+        $mail = new PHPMailer;
+
+        // Paramètres SMTP
+        $mail->isSMTP();                                      // Utilisation de SMTP
+        $mail->Host = 'smtp.gmail.com';                      // Serveur SMTP
+        $mail->SMTPAuth = true;                               // Authentification SMTP activée
+        $mail->Username = 'ghayakorbi7@gmail.com';         // Adresse e-mail SMTP
+        $mail->Password = 'qdlh yatg lgjp bmtk';          // Mot de passe SMTP
+        $mail->SMTPSecure = 'tls';                            // Chiffrement TLS, utilisez `ssl` si nécessaire
+        $mail->Port = 587;                                    // Port SMTP
+
+        // Destinataire
+        $mail->setFrom('ghayakorbi7@gmail.com', 'ghaya');
+        $mail->addAddress($email);                            // Adresse e-mail du destinataire
+
+        // Contenu de l'e-mail
+        $mail->isHTML(true);                                  // Définir le format de l'e-mail sur HTML
+        $mail->Subject = 'Confirmation d\'entretien';
+        $mail->Body    = 'Votre entretien a été enregistré avec succès.';
+        $mail->Body   .= '<a href="http://localhost/gestionentretien/View/back/confirm.php?email=' . urlencode($email) . '">Confirmer</a> votre entretien.';
+
+        // Envoyer l'e-mail
+        if(!$mail->send()) {
+            echo 'Erreur lors de l\'envoi de l\'e-mail : ' . $mail->ErrorInfo;
+        } else {
+            echo 'E-mail de confirmation envoyé avec succès!';
+        }
+    }
+    // Dans votre classe entretienC
+
+function updateStatusByEmail($email, $status)
+{
+    $sql = "UPDATE entretien SET statut = :status WHERE email = :email";
+    $db = config::getConnexion();
+    try {
+        $query = $db->prepare($sql);
+        $query->execute([
+            'email' => $email,
+            'status' => $status,
+        ]);
+    } catch (Exception $e) {
+        echo 'Error: ' . $e->getMessage();
+    }
 }
+
+
 
 
     function showentretien($IDE)
@@ -128,6 +186,27 @@ class entretienC
 
         // Retourner les événements formatés
         return $formattedEvents;
+    }
+    public function countUsersByState($state) {
+        $sql = "SELECT COUNT(*) as total FROM entretien WHERE statut = :statut";
+        $db = config::getConnexion();
+        try {
+            $query = $db->prepare($sql);
+            $query->execute([
+                "statut" => $state
+            ]);
+    
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+    
+            if ($result) {
+                return $result['total']; // Retourne le nombre total d'utilisateurs dans cet état
+            } else {
+                return 0; // Aucun utilisateur trouvé dans cet état
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 }
 

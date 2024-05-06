@@ -8,10 +8,11 @@ class entretien{
     private $langue;
     private $format;
     private $numtel;
+    private $statut;
    
     
     
-    public function __construct($IDE ,$nom, $email, $titreposte, $daterdv, $langue,$format,$numtel){
+    public function __construct($IDE ,$nom, $email, $titreposte, $daterdv, $langue,$format,$numtel,$statut="en attente"){
         $this->IDE = $IDE;
         $this->nom = $nom;
         $this->email = $email;
@@ -20,6 +21,8 @@ class entretien{
         $this->langue = $langue;
         $this->format = $format;
         $this->numtel = $numtel;
+        $this->statut = $statut; // Initialisation de l'attribut statut
+      
         
        
     }
@@ -81,7 +84,22 @@ class entretien{
     public function setNumTel($numtel){
         $this->numtel = $numtel; 
     }
+    
 
+
+
+    public function getStatut()
+    {
+        return $this->statut;
+    }
+
+  
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
 
 }
 

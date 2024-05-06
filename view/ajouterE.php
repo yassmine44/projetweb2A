@@ -251,11 +251,11 @@ if (
         <!-- Header Start -->
         <div class="container-fluid bg-breadcrumb">
             <div class="container text-center py-5" style="max-width: 900px;">
-                <h3 class="text-white display-3 mb-4">Entretien</h1>
+                <h3 class="text-white display-3 mb-4">entreprise</h1>
                 <ol class="breadcrumb justify-content-center mb-0">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     
-                    <li class="breadcrumb-item active text-white">Entretien</li>
+                    <li class="breadcrumb-item active text-white">entreprise</li>
                 </ol>    
             </div>
         </div>
@@ -347,6 +347,7 @@ if (
                             <a href=""><i class="fas fa-angle-right me-2"></i> communauté</a>
                             <a href=""><i class="fas fa-angle-right me-2"></i> reclamation</a>
                             <a href=""><i class="fas fa-angle-right me-2"></i> Entretien</a>
+                            <a href=""><i class="fas fa-angle-right me-2"></i> entreprise</a>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-3">

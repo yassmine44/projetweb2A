@@ -48,8 +48,8 @@ $entretien = null;
                 $_POST['daterdv'],
                 $_POST['langue'],
                 $_POST['format'],
-                $_POST['numtel']
-
+                $_POST['numtel'],
+                null
             );
 
             // Ajouter l'entretien à la base de données
@@ -360,8 +360,7 @@ $entretien = null;
                                 <span id="erreurnumtel" style="color: red"></span>
                             </td>
                         </tr>
-            
-            
+                        
                         <td>
                             <input type="submit" value="Save">
                         </td>

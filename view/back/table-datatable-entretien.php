@@ -475,6 +475,7 @@ $tab = $c->listentretien();
 												<th>langue</th>
 												<th>format</th>
 												<th>numtel</th>
+												<th>statut</th>
                                                 <th>Update</th>
                                                 <th>Delete</th>
                                             </tr>
@@ -493,7 +494,7 @@ $tab = $c->listentretien();
 													<td><?= $entretien['langue']; ?></td>
 													<td><?= $entretien['format']; ?></td>
 													<td><?= $entretien['numtel']; ?></td>
-
+													<td><?= $entretien['statut']; ?></td>
                                                     <td align="center">
                                                         <form method="POST" action="updateentretien.php">
                                                             <input type="submit" name="update" value="Update">
