@@ -130,3 +130,32 @@
 
 })(jQuery);
 
+
+// Controle de saisie pour le numéro de téléphone (seuls les chiffres sont autorisés)
+function controleNumeroTel(input) {
+    input.value = input.value.replace(/\D/g, ''); // Supprime tout caractère qui n'est pas un chiffre
+}
+
+// Controle de saisie pour le nom et prénom (seules les lettres sont autorisées)
+function controleNomPrenom(input) {
+    input.value = input.value.replace(/[^a-zA-Z]/g, ''); // Supprime tout caractère qui n'est pas une lettre
+}
+
+// Controle de saisie pour la date (format jj/mm/aaaa et date future)
+function controleDate(input) {
+    // Vérifier si la date est au format jj/mm/aaaa
+    var pattern = /^(0?[1-9]|[12][0-9]|3[01])\/(0?[1-9]|1[0-2])\/\d{4}$/;
+    if (!pattern.test(input.value)) {
+        alert("Format de date invalide. Veuillez utiliser le format jj/mm/aaaa.");
+        input.value = ''; // Effacer la saisie invalide
+        return;
+    }
+
+    // Vérifier si la date est dans le futur
+    var inputDate = new Date(input.value.split("/").reverse().join("-"));
+    var currentDate = new Date();
+    if (inputDate <= currentDate) {
+        alert("La date doit être dans le futur.");
+        input.value = ''; // Effacer la saisie invalide
+    }
+}

@@ -1,4 +1,39 @@
 <?php
+
+include '../Controller/entrepriseE.php';
+include '../Model/entreprise.php';
+
+$error = "";
+
+// create client
+$entreprise = null;
+
+// create an instance of the controller
+$entrepriseE = new entrepriseE();
+if (
+    isset($_POST["identreprise"]) &&
+    isset($_POST["nom"]) &&
+    isset($_POST["domaine"]) 
+   
+) {
+    if (
+        !empty($_POST['identreprise']) &&
+        !empty($_POST["nom"]) &&
+        !empty($_POST["domaine"]) 
+    
+    ) {
+        $entreprise = new entreprise(
+            
+            $_POST['identreprise'],
+            $_POST['nom'],
+            $_POST['domaine']
+            
+        );
+        $entrepriseE->addentreprise($entreprise);
+        header('Location:listentreprise.php');
+    } else
+        $error = "Missing information";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +64,113 @@
 
         <!-- Template Stylesheet -->
         <link href="css/style.css" rel="stylesheet">
+        <style>
+            body {
+                background: url(""); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+   
+            }
+            
+            
+            .container {
+                max-width: 600px;
+                margin: 50px auto;
+                background-color: hsla(238, 92%, 15%, 0.953);
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+            }
+            h1 {
+                color: #fff;
+                text-align: center;
+            }
+            label {
+                font-weight: bold;
+            }
+            
+            input[type="text"], input[type="email"], input[type="tel"], input[type="datetime-local"] {
+                width: calc(100% - 40px);
+                padding: 10px;
+                margin: 5px 0 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+            select {
+                width: calc(100% - 40px);
+                padding: 10px;
+                margin: 5px 0 20px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+            .messageBox {
+                position: relative;
+                margin-bottom: 20px;
+            }
+            label {
+                display: block;
+            }
+
+            #messageInput {
+                width: calc(100% - 80px);
+                padding: 10px;
+                margin-right: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+            #sendButton {
+                background-color: #007bff;
+                color: #1e0606;
+                border: none;
+                border-radius: 5px;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+            #sendButton svg {
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+                fill: #fff;
+            }
+            .fileUploadWrapper {
+                position: relative;
+                overflow: hidden;
+                display: inline-block;
+                margin-right: 10px;
+            }
+            .fileUploadWrapper input[type="file"] {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+            }
+            .tooltip {
+                position: absolute;
+                top: -30px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #007bff;
+                color: #e7dbdb;
+                padding: 5px 10px;
+                border-radius: 5px;
+                font-size: 12px;
+                white-space: nowrap;
+                visibility: hidden;
+                opacity: 0;
+                transition: visibility 0s, opacity 0.2s linear;
+            }
+            .fileUploadWrapper:hover .tooltip {
+                visibility: visible;
+                opacity: 1;
+            }
+        </style>
     </head>
 
     <body>
@@ -100,6 +242,7 @@
                             </div>
                         </div>
                         <a href="reclamation.html" class="nav-item nav-link active">Reclamation</a>
+                        <a href="entretien.html" class="nav-item nav-link active">Entretien</a>
                    
             </nav>
         </div>
@@ -108,105 +251,56 @@
         <!-- Header Start -->
         <div class="container-fluid bg-breadcrumb">
             <div class="container text-center py-5" style="max-width: 900px;">
-                <h3 class="text-white display-3 mb-4">Reclamation</h1>
+                <h3 class="text-white display-3 mb-4">Entretien</h1>
                 <ol class="breadcrumb justify-content-center mb-0">
                     <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                     
-                    <li class="breadcrumb-item active text-white">Reclamation</li>
+                    <li class="breadcrumb-item active text-white">Entretien</li>
                 </ol>    
             </div>
         </div>
         <!-- Header End -->
 
-        <!-- reclamation Start -->
-        <div class="container-fluid reclamation bg-light py-5">
-            <div class="container py-5">
-                <div class="mx-auto text-center mb-5" style="max-width: 900px;">
-                    <h5 class="section-title px-3">Reclamation</h5>
-                    <h1 class="mb-0">Report For Any Query</h1>
-                </div>
-                <div class="row g-5 align-items-center">
-                    <div class="col-lg-4">
-                        <div class="bg-white rounded p-4">
-                            <div class="text-center mb-4">
-                                <i class="fa fa-map-marker-alt fa-3x text-primary"></i>
-                                <h4 class="text-primary"><Address></Address></h4>
-                                <p class="mb-0"> Ecole Supérieur Privée </p>
-                            </div>
-                            <div class="text-center mb-4">
-                                <i class="fa fa-phone-alt fa-3x text-primary mb-3"></i>
-                                <h4 class="text-primary">Mobile</h4>
-                                <p class="mb-0">+216 123 580</p>
-                                <p class="mb-0">+216 479 580</p>
-                            </div>
-                           
-                            <div class="text-center">
-                                <i class="fa fa-envelope-open fa-3x text-primary mb-3"></i>
-                                <h4 class="text-primary">Email</h4>
-                                <p class="mb-0">Jobflex@gmail.com</p>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <h3 class="mb-2">Send us a message</h3>
-                        <p class="mb-4">"Nous comprenons l'importance de chaque réclamation et nous nous engageons à trouver une solution qui vous convienne."<a href="reclamation.html">Report  Now</a>.</p>
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="name"   name="name" placeholder="Your Name">
-                                        <label for="name">Your Name</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control border-0"  name ="email" id="email" placeholder="Your Email">
-                                        <label for="email">Your Email</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="number"  name="number"  placeholder="Phone Number">
-                                        <label for="name">Your Number</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating">
-                                        <input type="date" class="form-control border-0" id="date"  name="date" placeholder="date">
-                                        <label for="date">Date</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="subject"  name="subject"  placeholder="Subject">
-                                        <label for="subject">Subject</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-12">
-                                    <div class="form-floating">
-                                        <textarea class="form-control border-0" placeholder="Leave a message here"  name="message" id="message" style="height: 160px"></textarea>
-                                        <label for="message">Message</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Send Reclamation</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-12">
-                        <div class="rounded">
-                            
-                            <iframe  class="rounded w-100"  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d204200.54052927237!2d9.92558956146241!3d36.8991163659185!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12e2cb75abbb1733%3A0x557a99cdf6c13b7b!2sESPRIT%20Ecole%20Sup%C3%A9rieure%20Priv%C3%A9e%20d&#39;Ing%C3%A9nierie%20et%20de%20Technologies!5e0!3m2!1sfr!2stn!4v1711659029821!5m2!1sfr!2stn" 
-                            width="600" style="height: 450px;"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Contact End -->
+        <!-- entretien Start -->
+        <div class="container">
+            <h1>Entreprise</h1>
+            <form action="" method="POST">
+                <table>
+                     <tr>
+                        <td><label for="identreprise">identreprise :</label></td>
+                        <td>
+                            <input type="text" id="identreprise" name="identreprise" />
+                            <span id="erreuridentreprise" style="color: red"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="nom">Nom :</label></td>
+                        <td>
+                            <input type="text" id="nom" name="nom" />
+                            <span id="erreurNom" style="color: red"></span>
+                        </td>
+                    </tr>
+                   
+                    <tr>
+                        <td><label for="domaine">domaine :</label></td>
+                        <td>
+                            <input type="text" id="domaine" name="domaine" />
+                            <span id="erreurdomaine" style="color: red"></span>
+                        </td>
+                    </tr>
+                   
+        
+                    <td>
+                        <input type="submit" value="Save">
+                    </td>
+                    <td>
+                        <input type="reset" value="Reset">
+                    </td>
+                </table>
+        
+            </form>
+
+        
 
         <!-- Subscribe Start -->
         <div class="container-fluid subscribe py-5">
@@ -276,32 +370,14 @@
                                             
                                                 <option value="3">New York</option>
                                             </select>
-                                            <label for="select1">English</label>
+                                           
                                         </div>
                                     </form>
                                 </div>
-                                <div class="col-xl-6">
-                                    <form>
-                                        <div class="form-floating">
-                                            <select class="form-select bg-dark border" id="select1">
-                                                <option value="1">USD</option>
-                                                <option value="2">EUR</option>
-                                                <option value="3">INR</option>
-                                                
-                                            </select>
-                                            <label for="select1">$</label>
-                                        </div>
-                                    </form>
-                                </div>
+                                
                             </div>
-                            <h4 class="text-white mb-3">Payments</h4>
-                            <div class="footer-bank-card">
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-amex fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-visa fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fas fa-credit-card fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-mastercard fa-2x"></i></a>
-                                <a href="#" class="text-white me-2"><i class="fab fa-cc-paypal fa-2x"></i></a>
-                                <a href="#" class="text-white"><i class="fab fa-cc-discover fa-2x"></i></a>
+                           
+                              
                             </div>
                         </div>
                     </div>

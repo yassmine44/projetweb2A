@@ -612,77 +612,59 @@
 									</svg>
                                     <span class="badge light text-white bg-warning rounded-circle">12</span>
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end">
-                                    <div id="DZ_W_Notification1" class="widget-media dlab-scroll p-3" style="height:380px;">
+								<div class="dropdown-menu dropdown-menu-end">
+									<div id="DZ_W_Notification1" class="widget-media dlab-scroll p-3" style="height:380px;">
 										<ul class="timeline">
-											<li>
-												<div class="timeline-panel">
-													<div class="media me-2">
-														<img alt="image" width="50" src="images/avatar/1.jpg">
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Dr sultads Send you Photo</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media me-2 media-info">
-														KG
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Resport created successfully</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media me-2 media-success">
-														<i class="fa fa-home"></i>
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Reminder : Treatment Time!</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											 <li>
-												<div class="timeline-panel">
-													<div class="media me-2">
-														<img alt="image" width="50" src="images/avatar/1.jpg">
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Dr sultads Send you Photo</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media me-2 media-danger">
-														KG
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Resport created successfully</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="timeline-panel">
-													<div class="media me-2 media-primary">
-														<i class="fa fa-home"></i>
-													</div>
-													<div class="media-body">
-														<h6 class="mb-1">Reminder : Treatment Time!</h6>
-														<small class="d-block">29 July 2020 - 02:26 PM</small>
-													</div>
-												</div>
-											</li>
+											<?php
+											// Inclure le fichier de configuration et la classe entretienC
+											require "C:/xampp/htdocs/gestionentretien/Controller/entretienC.php";
+								
+											// Créer une instance de la classe entretienC
+											$entretienManager = new entretienC();
+								
+											// Récupérer les entretiens à venir depuis la base de données
+											$entretiens = $entretienManager->getEvents();
+								
+											// Date et heure actuelles
+											$currentDateTime = date("Y-m-d H:i:s");
+								
+											// Parcourir les entretiens
+											foreach ($entretiens as $entretien) {
+												$nom = $entretien['nom'];
+												$dateRdv = $entretien['daterdv'];
+								
+												// Vérifier si la date de l'entretien est proche
+												if (strtotime($dateRdv) <= strtotime($currentDateTime) + (24 * 3600)) { // 24 heures avant l'entretien
+													// Envoyer la notification
+													// Vous pouvez envoyer un e-mail, un SMS, ou une notification push en fonction de vos besoins
+													// Par exemple, pour l'envoi d'un e-mail
+													$subject = "Rappel : Entretien le $dateRdv";
+													$message = "Bonjour $nom,\n\nCeci est un rappel pour votre entretien le $dateRdv.\n\nCordialement, \nVotre entreprise";
+													
+													// Afficher la notification
+													?>
+													<li>
+														<div class="timeline-badge primary"></div>
+														<div class="timeline-panel">
+															<div class="timeline-heading">
+																<h5 class="timeline-title"><?php echo $subject; ?></h5>
+															</div>
+															<div class="timeline-body">
+																<p>Bonjour <?php echo $nom; ?>,</p>
+																<p>Ceci est un rappel pour votre entretien le <?php echo $dateRdv; ?>.</p>
+																<p>Cordialement,</p>
+																<p>Votre entreprise</p>
+															</div>
+														</div>
+													</li>
+													<?php
+												}
+											}
+											?>
 										</ul>
 									</div>
+								</div>
+								
                                     <a class="all-notification" href="javascript:void(0);">See all notifications <i class="ti-arrow-end"></i></a>
                                 </div>
                             </li>
@@ -999,11 +981,11 @@
 									</div>
 									<div class="profile-details">
 										<div class="profile-name px-3 pt-2">
-											<h4 class="text-primary mb-0">Soeng Souy</h4>
+											<h4 class="text-primary mb-0">ghaya korbi</h4>
 											<p>UX / UI Designer</p>
 										</div>
 										<div class="profile-email px-2 pt-2">
-											<h4 class="text-muted mb-0">info@example.com</h4>
+											<h4 class="text-muted mb-0">ghayakorbi7@gmail.com</h4>
 											<p>Email</p>
 										</div>
 										<div class="dropdown ms-auto">

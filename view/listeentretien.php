@@ -1,12 +1,10 @@
 <?php
 include "../Controller/entretienC.php";
 
+
 // Créer une instance de la classe entretienC
 $c = new entretienC();
-
-// Récupérer les données des entretiens depuis la base de données
-$entretiens = $c->listentretien();
-
+$tab = $c->listentretien();
 ?>
 
 <center>
@@ -29,7 +27,7 @@ $entretiens = $c->listentretien();
         <th>Delete</th>
     </tr>
 
-    <?php foreach ($entretiens as $entretien) : ?>
+    <?php foreach ($tab as $entretien) : ?>
         <tr>
             <td><?= $entretien['IDE']; ?></td>
             <td><?= $entretien['nom']; ?></td>
@@ -40,8 +38,8 @@ $entretiens = $c->listentretien();
             <td><?= $entretien['format']; ?></td>
             <td><?= $entretien['numtel']; ?></td>
             <td align="center">
-                    <form method="POST" action="modifier.php">
-                        <input type="submit" name="modifier" value="modifier" class="btn btn-secondary m-2">
+                    <form method="POST" action="updateentretien.php">
+                        <input type="submit" name="update" value="update">
                         <input type="hidden" value="<?php echo $entretien['IDE']; ?>" name="IDE">
                     </form>
                 </td>
@@ -49,6 +47,8 @@ $entretiens = $c->listentretien();
             <a href="delete.php?IDE=<?php echo $entretien['IDE']; ?>" class="text-danger">Delete</a>
         
             </td>
+            
+
         </tr>
     <?php endforeach; ?>
 </table>

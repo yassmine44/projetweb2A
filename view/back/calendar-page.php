@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html>
+﻿<?php
+
+require "C:/xampp/htdocs/gestionentretien/Controller/entretienC.php";
+
+// Instancier la classe entretienC
+$entretienC = new entretienC();
+
+// Récupérer les événements depuis la base de données à l'aide de la méthode getEventsFromDatabase de la classe entretienC
+$events = $entretienC->getEventsFromDatabase();
+
+// Renvoyer les événements au format JSON
+echo json_encode($events);
+
+?>
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -23,6 +39,8 @@
 	
 	<!-- Style css -->
     <link href="css/style.css" rel="stylesheet">
+
+	<script src="C:/xampp/htdocs/gestionentretien/view/back/js/plugins-init/calendar.js"></script>
 	
 </head>
 <body>
@@ -983,6 +1001,9 @@
 				</div>
             </div>
         </div>
+		
+		
+
         <!--**********************************
             Content body end
         ***********************************-->

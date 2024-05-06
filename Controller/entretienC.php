@@ -1,5 +1,5 @@
 <?php
-include '../config.php';
+require "C:/xampp/htdocs/gestionentretien/config.php";
 //include '../Model/entretien.php';
 
 
@@ -34,8 +34,8 @@ class entretienC
 
 
       function ajouterEntretien($entretien){
-        $sql="INSERT INTO entretien (IDE ,nom, email, numtel, titreposte, daterdv, langue,format) 
-        VALUES (:IDE ,:nom, :email,:numtel, :titreposte,:daterdv, :langue,:format)";
+        $sql="INSERT INTO entretien 
+        VALUES (:IDE ,:nom, :email, :titreposte,:daterdv, :langue,:format ,:numtel)";
 
         $db = config::getConnexion();
         try {
@@ -48,9 +48,9 @@ class entretienC
                 'daterdv' => $entretien->getDaterdv(),
                 'langue' => $entretien->getLangue(),
                 'format' => $entretien->getFormat(),
-                    'numtel' => $entretien->getNumtel()
+                'numtel' => $entretien->getNumtel(),
                 ]);
-        } catch (PDOException $e) {
+        } catch (Exception $e) {
             echo "Erreur: " . $e->getMessage();
         }
 }
@@ -72,7 +72,7 @@ class entretienC
 
     function updateEntretien($entretien, $IDE)
 {
-    $sql = "UPDATE entretien SET nom = :nom, email = :email, titreposte = :titreposte, daterdv = :daterdv, langue = :langue, format = :format, numtel = :numtel WHERE IDE = :IDE";
+    $sql = "UPDATE entretien SET IDE = :IDE ,nom = :nom, email = :email, titreposte = :titreposte, daterdv = :daterdv, langue = :langue, format = :format, numtel = :numtel WHERE IDE = :IDE";
     $db = config::getConnexion();
     try {
         $query = $db->prepare($sql);
@@ -91,5 +91,44 @@ class entretienC
     }
 }
 
+ // Méthode pour récupérer les événements depuis la base de données
+ public function getEvents()
+ {
+     // Connexion à la base de données
+     $db = config::getConnexion();
+
+     // Requête pour récupérer les événements
+     $sql = "SELECT nom, daterdv FROM entretien";
+     $query = $db->query($sql);
+     $events = $query->fetchAll(PDO::FETCH_ASSOC);
+
+     // Retourner les événements
+     return $events;
+ }
+
+ // Autres méthodes de la classe entretienC...
+ public function getEventsFromDatabase()
+    {
+        $db = config::getConnexion();
+        $sql = "SELECT nom, daterdv FROM entretien";
+        $query = $db->query($sql);
+        $events = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        // Convertir les événements au format compatible avec FullCalendar
+        $formattedEvents = [];
+        foreach ($events as $event) {
+            // Convertir la date en format ISO 8601
+            $start = date('Y-m-d\TH:i:s', strtotime($event['daterdv']));
+            // Ajouter l'événement formaté au tableau
+            $formattedEvents[] = [
+                'title' => $event['nom'],
+                'start' => $start,
+            ];
+        }
+
+        // Retourner les événements formatés
+        return $formattedEvents;
+    }
 }
+
 

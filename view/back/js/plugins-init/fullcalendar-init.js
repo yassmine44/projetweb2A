@@ -63,7 +63,7 @@
 			  arg.draggedEl.parentNode.removeChild(arg.draggedEl);
 			}
 		  },
-		  initialDate: '2021-02-13',
+		  initialDate: '2024-01-01',
 			  weekNumbers: true,
 			  navLinks: true, // can click day/week names to navigate views
 			  editable: true,
@@ -75,9 +75,8 @@
 				  start: '2021-02-01'
 				},
 				{
-				  title: 'Long Event',
-				  start: '2021-02-07',
-				  end: '2021-02-10',
+				  title: 'fete du travail',
+				  start: '2024-05-01',
 				  className: "bg-danger"
 				},
 				{
@@ -186,7 +185,7 @@ function fullCalender(){
 			  arg.draggedEl.parentNode.removeChild(arg.draggedEl);
 			}
 		  },
-		  initialDate: '2021-02-13',
+		  initialDate: '2024-02-13',
 			  weekNumbers: true,
 			  navLinks: true, // can click day/week names to navigate views
 			  editable: true,
@@ -198,9 +197,8 @@ function fullCalender(){
 				  start: '2021-02-01'
 				},
 				{
-				  title: 'Long Event',
-				  start: '2021-02-07',
-				  end: '2021-02-10',
+				  title: 'fete',
+				  start: '2024-05-01',
 				  className: "bg-danger"
 				},
 				{

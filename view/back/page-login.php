@@ -1,4 +1,66 @@
-﻿<!DOCTYPE html>
+﻿<?php
+session_start(); // Démarre la session PHP
+ 
+require "C:/xampp/htdocs/gestionentretien/Controller/userU.php ";
+
+class Auth
+{
+    public static function login($email, $password)
+    {
+        $db = config::getConnexion();
+        $sql = "SELECT * FROM user WHERE email = :email";
+        $query = $db->prepare($sql);
+        $query->execute(array(':email' => $email));
+        $user = $query->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['user'] = $user; // Stocke les données de l'utilisateur dans la session
+
+            // Redirection en fonction du rôle
+            if (strtolower($user['role']) === 'user') {
+                // Rediriger vers la page utilisateur
+                include "C:/xampp/htdocs/gestionentretien/view/index.php";
+                exit();
+            } else {
+                // Rediriger vers la page admin
+                header("Location: http://localhost/gestionentretien/view/back/index.html");
+                exit();
+            }
+            
+        } else {
+            // Mauvaises informations de connexion
+            echo "Identifiants invalides";
+        }
+    }
+
+    public static function logout()
+    {
+        session_destroy(); // Détruit la session
+        header("Location: http://localhost/gestionentretien/login.php"); // Redirige vers la page de connexion
+        exit();
+    }
+
+    public static function isLoggedIn()
+    {
+        return isset($_SESSION['user']);
+    }
+
+    public static function getUser()
+    {
+        return isset($_SESSION['user']) ? $_SESSION['user'] : null;
+    }
+}
+
+// Exemple d'utilisation pour la page de connexion (login.php)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    Auth::login($email, $password);
+}
+?>
+
+
+<!DOCTYPE html>
 <html lang="en" class="h-100">
 
 <head>
