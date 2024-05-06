@@ -1,5 +1,6 @@
 
 <?php
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require "../../model/reclamation.php";
 require "../../controller/reclamationC.php";
 
@@ -1057,12 +1058,17 @@ require "../../controller/reclamationC.php";
                         </div>
                         <div class="row mb-3">
                           <div class="col-sm-10">
-                            <input type="text" class="form-control p-2" value="<?php echo $rec['etat']?>" name="etat" id="etat" placeholder="Etat">
-                          </div>
+                          
+							<select class="form-control p-2" value="<?php echo $rec['etat']?>" name="etat" id="etat" placeholder="Etat">
+                        <option value="">Sélectionnez l'état</option>
+                        <option value="Approved">Approved</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Rejected">Rejected</option>
+                      </select>						</div>
                         </div>
                         <div class="row mb-3">
                           <div class="col-sm-10">
-                            <input type="date" class="form-control p-2" value="<?php echo $rec['date']?>" name="date" id="date">
+                            <input type="date" class="form-control p-2" value="<?php echo date('Y-m-d'); ?>" name="date" id="date">
                           </div>
                         </div>
                         <div class="row mb-3">

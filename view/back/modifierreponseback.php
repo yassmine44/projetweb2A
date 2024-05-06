@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require "../../model/reponse.php";
 require "../../controller/reponseC.php";
 
@@ -1042,7 +1042,7 @@ debut         ***********************************-->
                   <form method="POST" onsubmit="return verif();">
                     <div class="row mb-3">
                       <div class="col-sm-10">
-                        <input type="date" name="date" value="<?php echo $rep['date']?>" class="form-control" id="date" placeholder="Date">
+                        <input type="date" name="date"value="<?php echo date('Y-m-d'); ?>" class="form-control" id="date" placeholder="Date">
                       </div>
                     </div>
                     <div class="row mb-3">
