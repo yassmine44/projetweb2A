@@ -15,12 +15,12 @@ class postC
             die('Error:' . $e->getMessage());
         }
     }
-    function supprimer($id)
+    function supprimer($id_post)
     {
-        $sql = "DELETE FROM post WHERE id = :id";
+        $sql = "DELETE FROM post WHERE id_post = :id_post";
         $db = config::getConnexion();
         $req = $db->prepare($sql);
-        $req->bindValue(':id', $id);
+        $req->bindValue(':id_post', $id_post);
         try {
             $req->execute();
         } catch (Exception $e) {
@@ -28,10 +28,10 @@ class postC
         }
     }
 
-    function ajouter($post)
+    function ajouter($post,$id_post)
     {
         $sql = "INSERT INTO post (date, description)
-        VALUES (:date,:description)";
+        VALUES (:date,:description)  WHERE id_post = :id_post";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
@@ -44,7 +44,7 @@ class postC
             echo 'Error: ' . $e->getMessage();
         }
     }
-    function modifier($post, $id)
+    function modifier($post, $id_post)
     {
         try {
             $db = config::getConnexion();
@@ -53,10 +53,10 @@ class postC
                     date = :date, 
                     description = :description,
                  
-                WHERE id= :id'
+                WHERE id_post= :id_post'
             );
             $query->execute([
-                'id' => $id,
+                'id_post' => $id_post,
                 'date' => $post->getDate(),
                 'description' => $post->getDescription(),
                
@@ -68,8 +68,8 @@ class postC
         }
     }
 
-    function recupererpost($id){
-        $sql="SELECT * from post where id=$id";
+    function recupererpost($id_post){
+        $sql="SELECT * from post where id_post=$id_post";
         $conn = new config();
         $db=$conn->getConnexion();
         try{

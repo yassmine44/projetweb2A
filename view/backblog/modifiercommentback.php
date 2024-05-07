@@ -26,7 +26,7 @@ require "../../controller/commentC.php";
                
                 $_POST['contenu'] 
             );
-			$commentC->modifier($comment,$_GET['id']);
+			$commentC->modifier($comment,$_GET['idc']);
         }
         else
             $error = "Missing information";
@@ -950,7 +950,7 @@ require "../../controller/commentC.php";
                         <ul aria-expanded="false">
                         <li><a href="Ajoutercommentback.php">Ajouter comment</a></li>
                             <li><a href="Affichercommentback.php">Afficher comment </a></li>
-                            <li><a href="Afficherpostback.php">Afficher Réponse   </a></li>                        </ul>
+                            <li><a href="Afficherpostback.php">Afficher post   </a></li>                        </ul>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-clone"></i>
@@ -1018,8 +1018,8 @@ require "../../controller/commentC.php";
           <h5 class="card-title">comments <span>| MODIFICATION</span></h5>
           <br>
           <?php 
-                if (isset($_GET['id'])){
-                  $rec = $commentC->recuperercomment($_GET['id']);
+                if (isset($_GET['idc'])){
+                  $rec = $commentC->recuperercomment($_GET['idc']);
               ?>
               <form method="POST" onsubmit="return verif();">
                 <div class="mb-5">

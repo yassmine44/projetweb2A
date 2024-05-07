@@ -14,17 +14,16 @@ class commentC
             die('Error:' . $e->getMessage());
         }
     } 
-    function ajouter($comment)
+    function ajouter($comment,$idc)
     {
         $sql = "INSERT INTO comment (nom, email ,contenu)
-        VALUES (:nom,:email, :contenu)";
+        VALUES (:nom,:email, :contenu)  WHERE idc = :idc";
         $db = config::getConnexion();
         try {
             $query = $db->prepare($sql);
             $query->execute([
                 'nom' => $comment->getNom(),
                 'email' => $comment->getEmail(),
-                
                 'contenu' => $comment->getContenu()
             ]);
         } catch (Exception $e) {
@@ -32,8 +31,8 @@ class commentC
         }
     }
     
-    function recuperercomment($id){
-        $sql="SELECT * from comment where id=$id";
+    function recuperercomment($idc){
+        $sql="SELECT * from comment where idc=$idc";
         $conn = new config();
         $db=$conn->getConnexion();
         try{
@@ -72,7 +71,7 @@ class commentC
     }
  
    
-    function modifier($comment, $id)
+    function modifier($comment, $idc)
     {
         {
         try {
@@ -83,10 +82,10 @@ class commentC
                     email = :email,
                     
                     contenu = :contenu
-                WHERE id= :id'
+                WHERE idc= :idc'
             );
             $query->execute([
-                'id' => $id,
+                'idc' => $idc,
                 'nom' => $comment->getNom(),
                 'email' => $comment->getEmail(),
 
@@ -97,12 +96,12 @@ class commentC
             $e->getMessage();
         }
     }
-    function supprimer($id)
+    function supprimer($idc)
     {
-        $sql = "DELETE FROM comment WHERE id = :id";
+        $sql = "DELETE FROM comment WHERE idc = :idc";
         $db = config::getConnexion();
         $req = $db->prepare($sql);
-        $req->bindValue(':id', $id);
+        $req->bindValue(':idc', $idc);
 
         try {
             $req->execute();
@@ -113,7 +112,7 @@ class commentC
 
     function count_comment(){
 
-        $sql="SELECT count(id) FROM comment" ;
+        $sql="SELECT count(idc) FROM comment" ;
         $db = config::getConnexion();
         try{
             $query = $db->query($sql);
@@ -127,7 +126,7 @@ class commentC
     }
     function count_AvecReponse(){
 
-        $sql="SELECT count(id) FROM reponse" ;
+        $sql="SELECT count(idc) FROM reponse" ;
         $db = config::getConnexion();
         try{
             $query = $db->query($sql);
@@ -141,9 +140,9 @@ class commentC
     }
     function affichernotif1()
         {
-            $sql="SELECT utilisateur.nom , utilisateur.prenom,restaurantt.nom,notificationn.id
+            $sql="SELECT utilisateur.nom , utilisateur.prenom,restaurantt.nom,notificationn.idc
             FROM notificationn INNER JOIN  utilisateur ON
-            utilisateur.id = notificationn.idclient 
+            utilisateur.idc = notificationn.idcclient 
             INNER JOIN  restaurantt ON
             restaurantt.num = notificationn.num  " ;
             $db = config::getConnexion();

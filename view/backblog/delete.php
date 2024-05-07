@@ -2,12 +2,12 @@
 include_once 'config.php';
 include '../model/comment.php';
 include '../controller/commentC.php';
-function supprimer($id)
+function supprimer($idc)
     {
-        $sql = "DELETE FROM comment WHERE id = :id";
+        $sql = "DELETE FROM comment WHERE idc = :idc";
         $db = config::getConnexion();
         $req = $db->prepare($sql);
-        $req->bindValue(':id', $id);
+        $req->bindValue(':idc', $idc);
 
         try {
             $req->execute();
@@ -18,7 +18,7 @@ function supprimer($id)
     
     
    
-    supprimer($_GET["id"]);
+    supprimer($_GET["idc"]);
     header('Location:Affichercommentback.php');
     
     

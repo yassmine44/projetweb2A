@@ -1,41 +1,46 @@
 <?php
-
 require "../../model/post.php";
-require "../../controller/postC.php";
+require "../../controller/commentC.php";
+require '../../controller/postC.php';
+
 
     $error = "";
     // create user
     $post = null;
+    $commentC = new commentC();
     // create an instance of the controller
     $postC = new postC();
     if (
-        isset($_POST['date']) &&
-        isset($_POST['description']) 
-        
+        isset($_POST['titre']) &&
+		isset($_POST['sujet']) &&
+        isset($_POST['date'])&&
+        isset($_POST['description'])
     ){
-
         if (
-            !empty($_POST["date"]) &&
-            !empty($_POST["description"]) 
-         
+            !empty($_POST["titre"]) &&
+			!empty($_POST["sujet"]) &&
+            !empty($_POST["date"])&&
+            !empty($_POST["description"])
         ) {
             $post = new post(
+				$_POST['titre'],
+                $_POST['sujet'] ,
                 $_POST['date'],
-                $_POST['description'] 
-             
+                $_POST['description'] ,
+                $_GET["id_post"]
             );
-			$postC->modifier($post,$_GET['id']);
+			$postC->ajouter($post);
         }
         else
             $error = "Missing information";
-    }  
-	if(isset($_POST['modifier']))
+    }
+
+    //$comment=$commentC->recuperercomment($_GET["idc"]);
+	if (isset($_POST['ajouter']))
 	{
-    	header ('Location:Afficherpostback.php');
+		header ('Location::ajouterpostback.php');
 	}
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,7 +94,7 @@ require "../../controller/postC.php";
             Nav header start
         ***********************************-->
 		<div class="nav-header">
-        <a href="index.html" class="brand-logo">
+        <a href="ajoutercommentback.php" class="brand-logo">
         <div> <center> <img src="images/logojob.png" alt="logo"  width="80"  height="80"></center></div>
            
                
@@ -619,7 +624,7 @@ require "../../controller/postC.php";
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-                                Modification du réponse
+                                Table réponse 
                             </div>
 							
                         </div>
@@ -944,21 +949,31 @@ require "../../controller/postC.php";
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-table"></i>
-							<span class="nav-text">Réclamation</span>
+							<span class="nav-text">blog</span>
 						</a>
                         <ul aria-expanded="false">
-                        <li><a href="Ajouterreclamationback.php">Ajouter Réclamation</a></li>
-                            <li><a href="Afficherreclamationback.php">Afficher Réclamation </a></li>
-                            <li><a href="Afficherpostback.php">Afficher Réponse   </a></li>                        </ul>
+                        <li><a href="ajoutercommentback.php">Ajouter post</a></li>
+                            <li><a href="affichercommentback.php">Afficher comment </a></li>
+                            <li><a href="Afficherpostback.php">Afficher post   </a></li>                        </ul>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-clone"></i>
-                            <span class="nav-text">GO TO FRONT</span>
+							<span class="nav-text">Pages</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="">site web</a></li>
-                            <li><a href="">Register</a></li>
-                          
+                            <li><a href="page-login.html">Login</a></li>
+                            <li><a href="page-register.html">Register</a></li>
+                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
+                                <ul aria-expanded="false">
+                                    <li><a href="page-error-400.html">Error 400</a></li>
+                                    <li><a href="page-error-403.html">Error 403</a></li>
+                                    <li><a href="page-error-404.html">Error 404</a></li>
+                                    <li><a href="page-error-500.html">Error 500</a></li>
+                                    <li><a href="page-error-503.html">Error 503</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="page-lock-screen.html">Lock Screen</a></li>
+                            <li><a href="empty-page.html">Empty Page</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -992,35 +1007,31 @@ require "../../controller/postC.php";
 				</div>
 			</div>
         </div>
-        <!--**********************************
+ <!--**********************************
             Sidebar end
         ***********************************-->
 
         <!--**********************************
             Content body start
         ***********************************-->
+
         <div class="content-body">
             <div class="container-fluid">
-				
-
-                <section class="section dashboard">
-  <div class="row">
+            <div class="row page-titles">
+            <ol class="breadcrumb">
+						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
+						<li class="breadcrumb-item"><a href="javascript:void(0)">   Ajout du Réponse</a></li>
+					</ol>
+                </div>
   
-  </div>
-</section>
- <!--**********************************
-debut         ***********************************-->
-					
-
-<main id="main" class="main">
 
 <div class="pagetitle">
-  <h1>post</h1>
+  <h1>Réponses</h1>
   <nav>
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item">post</li>
-      <li class="breadcrumb-item active">Modifier</li>
+      <li class="breadcrumb-item">Réponses</li>
+      <li class="breadcrumb-item active">Ajouter</li>
     </ol>
   </nav>
 </div><!-- End Page Title -->
@@ -1030,50 +1041,50 @@ debut         ***********************************-->
     <div class="col-12">
       <div class="card recent-sales overflow-auto">
         <div class="card-body">
-          <h5 class="card-title">post <span>| Modifier</span></h5>
+          <h5 class="card-title">post <span>| Ajout</span></h5>
           <br>    
-          <?php 
-            if (isset($_GET['id'])){
-              $rep = $postC->recupererpost($_GET['id']);
-          ?>
-          <form method="POST">
+          <form method="POST" onsubmit="return verif();" >
             <div class="mb-5">
               <div class="row">
                 <div class="card-body" style="margin-left:50px;">
-                  <form method="POST" onsubmit="return verif();">
-                    <div class="row mb-3">
+                  <form method="POST">
+				  <div class="row mb-3">
                       <div class="col-sm-10">
-                        <input type="date" name="date" value="<?php echo $rep['date']?>" class="form-control" id="date" placeholder="Date">
+                        <input type="titre" name="titre" class="form-control" id="titre" placeholder="titre">
+                      </div>
+                    </div>
+				  <div class="row mb-3">
+                      <div class="col-sm-10">
+                        <input type="sujet" name="sujet" class="form-control" id="sujet" placeholder="sujet">
                       </div>
                     </div>
                     <div class="row mb-3">
                       <div class="col-sm-10">
-                        <textarea name="description" class="form-control" id="description" placeholder="Description"><?php echo $rep['description']?></textarea>
+                        <input type="date" name="date" class="form-control" id="date" placeholder="Date">
                       </div>
                     </div>
-                    
+                    <div class="row mb-3">
+                      <div class="col-sm-10">
+                        <textarea name="description" class="form-control" id="description" placeholder="Description"></textarea>
+                        <br>
+                      </div>
+                    </div>
                     <div class="text-center">
-                      <input class="btn btn-primary" type="submit" name="modifier" value="Modifier">
+                      <input class="btn btn-primary" type="submit" name="ajout" value="Ajouter">
                     </div>
+              
                   </form>
                 </div>
               </div>
             </div>
           </form>
-          <?php } ?>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-</main><!-- End #main -->
-
-
-	
-                                      <!--**********************************
-          debu
-        ***********************************-->        
+				                         
                                            
         <!--**********************************
             Content body end

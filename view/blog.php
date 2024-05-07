@@ -174,7 +174,9 @@ if (isset($_POST["aff"]) == "Tri") {
                             <div class="blog_1rir ps-4 pe-3">
                                 <h5 class="mb-4"><a href="blogdetail.php"><?= $rec['date'] ?></a></h5>
                                 <p class="font_14"><?= $rec['description'] ?></p>
-                                <h6 class="font_14 mb-0 mt-4"><a class="button p-3 pt-2 pb-2" href="blogdetail.php">READ MORE</a></h6>
+                                <a href="affi.php?id=<?php echo $rec['id_post']; ?>"><button class="btn btn-outline-danger btn-sm">read more</button></a><br><br>
+                               
+                
                             </div>
                         </div>
                     </div>

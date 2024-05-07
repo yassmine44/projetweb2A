@@ -1,13 +1,13 @@
-﻿<?php
-require "../../controller/commentC.php";
-require "../../model/comment.php";
+<?php
+require "../../controller/postC.php";
+require "../../model/post.php";
 
-$d = new commentC();
+$d = new postC();
 
 if (isset($_POST["aff"]) == "Tri") {
-  $tab = $d->tricomment();
+  $tab = $d->tripost();
 } else if (isset($_POST["affi"] )== "Search") {
-  $tab = $d->recherchecomment($_POST["rech"]);
+  $tab = $d->recherchepost($_POST["rech"]);
 } else
   $tab = $d->afficher();
 
@@ -596,7 +596,7 @@ if (isset($_POST["aff"]) == "Tri") {
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-Affichage du comments                            </div>
+Affichage du post                            </div>
 							
                         </div>
                         <ul class="navbar-nav header-right">
@@ -920,11 +920,11 @@ Affichage du comments                            </div>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-table"></i>
-							<span class="nav-text">Réclamation</span>
+							<span class="nav-text">post</span>
 						</a>
                         <ul aria-expanded="false">
-                        <li><a href="Ajoutercommentback.php">Ajouter Réclamation</a></li>
-                            <li><a href="Affichercommentback.php">Afficher Réclamation </a></li>
+                        <li><a href="Ajouterpostback.php">Ajouter post</a></li>
+                            <li><a href="Afficherpostback.php">Afficher post </a></li>
                             <li><a href="Afficherreponseback.php">Afficher Réponse   </a></li>
                         </ul>
                     </li>
@@ -945,8 +945,8 @@ Affichage du comments                            </div>
 							<img src="images/pic5.jpg" alt="">
 						</div>
 						<div class="profile-info1">
-							<h4 class="fs-18 font-w500">chaima khiari</h4>
-							<span>chaimakhiari@gmail.com</span>
+							<h4 class="fs-18 font-w500">yassmine megbli</h4>
+							
 						</div>
 						<div class="profile-button">
 							<i class="fas fa-caret-down scale5 text-light"></i>
@@ -985,11 +985,11 @@ Affichage du comments                            </div>
                 <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>comments</h1>
+      <h1>post</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="AjoutercommentBack.php">Home</a></li>
-          <li class="breadcrumb-item">comments</li>
+          <li class="breadcrumb-item"><a href="AjouterpostBack.php">Home</a></li>
+          <li class="breadcrumb-item">post</li>
           <li class="breadcrumb-item active">Affichage</li>
         </ol>
       </nav>
@@ -1001,22 +1001,25 @@ Affichage du comments                            </div>
           <div class="card recent-sales overflow-auto">
             <div class="card-body">
                 <center>
-                    <form action="Affichercommentback.php" method="POST">
+                    <form action="Afficherpostback.php" method="POST">
                         <br>
                         <input type="text" placeholder="Search..." name="rech" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" >
                         <input type="submit" class="btn btn-outline-info btn-sm" name="affi" value="Search" />
                         <input type="submit" class="btn btn-outline-primary btn-sm" name="aff" value="Tri" />
                     </form>
                 </center>
-              <h5 class="card-title">comments <span>| Affichage</span></h5>
+              <h5 class="card-title">post <span>| Affichage</span></h5>
               <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th> Nom </th>
-                            <th> Email </th>
+                           
+						<th> titre </th>
+							<th> sujet </th>
+                          
+                            <th> Date </th>
+							<th> description </th>
                             
-                            <th> Contenu </th>
                            
                             <th>    </th>
                         </tr>
@@ -1024,15 +1027,18 @@ Affichage du comments                            </div>
                     <tbody>
 					<?php foreach ($tab as $rec) { ?>
                         <tr>
-                            <td> <?= $rec['nom'] ?> </td>
-                            <td> <?= $rec['email'] ?> </td>
                             
-                            <td> <?= $rec['contenu'] ?> </td>
+                            
+                            
+                            <td> <?= $rec['titre'] ?> </td>
+                            <td> <?= $rec['sujet'] ?> </td>
+							 
+                            <td> <?= $rec['date'] ?> </td>
+                            <td> <?= $rec['description'] ?> </td>
                             <td>
-                                <a href="modifiercommentback.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
-								<a href="mailing.php?id=<?php echo $rec['email']; ?>"><button class="btn btn-outline-danger btn-sm">send_mail</button></a><br><br>
-                                <a href="delete.php?id=<?php echo $rec['id']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a><br><br>
-                               
+                                <a href="modifierreponseback.php?id=<?php echo $rec['id_post']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
+                                <a href="supprimerpostback.php?id=<?php echo $rec['id_post']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a><br><br>
+                                
                             </td>
                         </tr>
                     <?php } ?>
@@ -1055,7 +1061,7 @@ Affichage du comments                            </div>
         <div class="col-12 grid-margin">
           <div class="card">
             <div class="card-body" >
-              <h4 class="card-title">Statistiques des comments et des Réponses</h4>
+              <h4 class="card-title">Statistiques des post et des Réponses</h4>
               <div class="col-lg-10 grid-margin stretch-card">
                 <div style="margin-left:250px;margin-top:50px;height:450;width:450px;">
                     <canvas id="myChartt" width="400" height="400"></canvas>
@@ -1111,8 +1117,8 @@ Affichage du comments                            </div>
 	<script src="js/demo.js"></script>
     <script src="js/styleSwitcher.js"></script>
 	<script>
-      var xValues = ["comments avec reponses","comments sans reponses"];
-      var yValues = [<?php echo $d->count_AvecReponse();?>, <?php echo $d->count_comment()-$d->count_AvecReponse();?>];
+      var xValues = ["post avec reponses","post sans reponses"];
+      var yValues = [<?php echo $d->count_AvecReponse();?>, <?php echo $d->count_post()-$d->count_AvecReponse();?>];
       var barColors = [
               "#0d6efd",
                 "#0dcaf0"
@@ -1130,10 +1136,24 @@ Affichage du comments                            </div>
                 options: {
                     title: {
                     display: true,
-                    text: "comments - Réponses"
+                    text: "post - Réponses"
                     }
                 }
           });
     </script>
+
+
 </body>
+<script>
+window.embeddedChatbotConfig = {
+chatbotId: "ZSsDhSKnqw2h8D6UBFc1C",
+domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="ZSsDhSKnqw2h8D6UBFc1C"
+domain="www.chatbase.co"
+defer>
+</script>
 </html>

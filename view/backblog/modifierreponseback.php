@@ -1,40 +1,48 @@
-﻿<?php
-require "../../model/comment.php";
-require "../../controller/commentC.php";
+<?php
 
-
+require "../../model/post.php";
+require "../../controller/postC.php";
 
     $error = "";
     // create user
-    $comment = null;
+    $post = null;
     // create an instance of the controller
-    $commentC = new commentC();
+    $postC = new postC();
     if (
-        isset($_POST['nom']) &&
-        isset($_POST['email']) &&
+		isset($_POST['titre']) &&
+		isset($_POST['sujet']) &&
+        isset($_POST['date'])&&
+        isset($_POST['description'])
         
-        isset($_POST['contenu'])
     ){
+
         if (
-            !empty($_POST["nom"]) &&
-            !empty($_POST["email"]) &&
-            
-            !empty($_POST["contenu"]) 
+            !empty($_POST["titre"]) &&
+			!empty($_POST["sujet"]) &&
+            !empty($_POST["date"])&&
+            !empty($_POST["description"])
+         
         ) {
-            $comment = new comment(
-                $_POST['nom'],
-                $_POST['email'] ,
-               
-                $_POST['contenu'] 
+            $post = new post(
+                $_POST['titre'],
+                $_POST['sujet'] ,
+                $_POST['date'],
+                $_POST['description'] ,
+                $_GET["id_post"]
+             
             );
-			$commentC->ajouter($comment);
-           
+			$postC->modifier($post,$_GET['id']);
         }
         else
             $error = "Missing information";
-   }
+    }  
+	if(isset($_POST['modifier']))
+	{
+    	header ('Location:Afficherpostback.php');
+	}
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -618,7 +626,7 @@ require "../../controller/commentC.php";
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-                                Table comment
+                                Modification du réponse
                             </div>
 							
                         </div>
@@ -943,22 +951,21 @@ require "../../controller/commentC.php";
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-table"></i>
-							<span class="nav-text">comment</span>
+							<span class="nav-text">Réclamation</span>
 						</a>
                         <ul aria-expanded="false">
-                        <li><a href="Ajoutercommentback.php">Ajouter comment</a></li>
-                            <li><a href="Affichercommentback.php">Afficher comment </a></li>
-                            <li><a href="Afficherpostback.php">Afficher post  </a></li>                        </ul>
+                        <li><a href="Ajouterreclamationback.php">Ajouter Réclamation</a></li>
+                            <li><a href="Afficherreclamationback.php">Afficher Réclamation </a></li>
+                            <li><a href="Afficherpostback.php">Afficher Réponse   </a></li>                        </ul>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-clone"></i>
-							<span class="nav-text">GO TO FRONT </span>
+                            <span class="nav-text">GO TO FRONT</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="page-login.html">site web</a></li>
-                            <li><a href="page-register.html">Register</a></li>
-                    
-                         
+                            <li><a href="">site web</a></li>
+                            <li><a href="">Register</a></li>
+                          
                         </ul>
                     </li>
                 </ul>
@@ -1001,57 +1008,89 @@ require "../../controller/commentC.php";
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
-				<div class="row page-titles">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">   Ajout du comment</a></li>
-					</ol>
-                </div>
-                <!-- row -->
+				
 
                 <section class="section dashboard">
+  <div class="row">
+  
+  </div>
+</section>
+ <!--**********************************
+debut         ***********************************-->
+					
+
+<main id="main" class="main">
+
+<div class="pagetitle">
+  <h1>post</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Home</a></li>
+      <li class="breadcrumb-item">post</li>
+      <li class="breadcrumb-item active">Modifier</li>
+    </ol>
+  </nav>
+</div><!-- End Page Title -->
+
+<section class="section dashboard">
   <div class="row">
     <div class="col-12">
       <div class="card recent-sales overflow-auto">
         <div class="card-body">
-          <h5 class="card-title">comments <span>| Ajout</span></h5>
-          <br>
-          <form method="POST" onsubmit="return verif();" action="Ajoutercommentback.php">
+          <h5 class="card-title">post <span>| Modifier</span></h5>
+          <br>    
+          <?php 
+            if (isset($_GET['id'])){
+              $rep = $postC->recupererpost($_GET['id']);
+          ?>
+          <form method="POST">
             <div class="mb-5">
               <div class="row">
                 <div class="card-body" style="margin-left:50px;">
-                  <div class="row mb-3">
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control p-2" name="nom" id="nom" placeholder="Nom">
+                  <form method="POST" onsubmit="return verif();">
+				  <div class="row mb-3">
+                      <div class="col-sm-10">
+                        <input type="titre" name="titre" value="<?php echo $rep['titre']?>" class="form-control" id="titre" placeholder="titre">
+                      </div>
                     </div>
-                  </div>
-                  <div class="row mb-3">
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control p-2" name="email" id="email" placeholder="Email">
+					<div class="row mb-3">
+                      <div class="col-sm-10">
+                        <input type="sujet" name="sujet" value="<?php echo $rep['sujet']?>" class="form-control" id="sujet" placeholder="sujet">
+                      </div>
                     </div>
-                  </div>
-                  <div class="row mb-3">
+                    <div class="row mb-3">
+                      <div class="col-sm-10">
+                        <input type="date" name="date" value="<?php echo $rep['date']?>" class="form-control" id="date" placeholder="Date">
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-sm-10">
+                        <textarea name="description" class="form-control" id="description" placeholder="Description"><?php echo $rep['description']?></textarea>
+                      </div>
+                    </div>
                     
-                    <div class="col-sm-10">
-                      <textarea class="form-control p-2" name="contenu" id="contenu" placeholder="Contenu"></textarea>
+                    <div class="text-center">
+                      <input class="btn btn-primary" type="submit" name="modifier" value="Modifier">
                     </div>
-                    <br>
-                  </div>
-                  <div class="text-center">
-                    <input class="btn btn-primary" type="submit" name="ajout" value="Ajouter">
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
           </form>
+          <?php } ?>
         </div>
       </div>
     </div>
   </div>
 </section>
-					
-				
-                                             
+
+</main><!-- End #main -->
+
+
+	
+                                      <!--**********************************
+          debu
+        ***********************************-->        
                                            
         <!--**********************************
             Content body end

@@ -2,7 +2,7 @@
 
 class comment
 {
-    private ?int $id = null;
+    private ?int $idc = null;
     private ?string $nom = null;
     private ?string $email = null;
     private ?string $contenu = null;
@@ -17,13 +17,13 @@ class comment
     }
 
     
-    public function getId()
+    public function getidc()
     {
-        return $this->id;
+        return $this->idc;
     }
-    public function setID($id)
+    public function setidc($idc)
     {
-        $this->id = $id;
+        $this->idc = $idc;
 
         return $this;
     }

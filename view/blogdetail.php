@@ -1,6 +1,8 @@
 <?php
 include_once '../controller/commentC.php';
 include_once '../model/comment.php';
+include_once '../controller/postC.php';
+include_once '../model/post.php';
 
 
     $error = "";
@@ -26,7 +28,7 @@ include_once '../model/comment.php';
               
                 $_POST['contenu'] 
             );
-			$commentC->ajouter($comment);
+			$commentC->ajouter($comment,$idc);
            
         }
         else
@@ -34,6 +36,7 @@ include_once '../model/comment.php';
             $error = "Missing information";
    }
 ?> 
+
 
 
 
@@ -193,7 +196,8 @@ include_once '../model/comment.php';
                     </div>
                    </div>
                   </div>
-                  <hr>
+                  
+   
      <section class="section novi-background section-lg text-center">
         <div class="container">
           <h3 class="wow-outer"><span class="wow slideInDown text-uppercase">comments</span></h3>
@@ -202,10 +206,9 @@ include_once '../model/comment.php';
                      </div>
     </section>
 
-
+ 
 
                         <h3 class="mb-2">add ur comment</h3>
-                        <input type="hidden" name="id_post" value="id_post">
                        
                         <form method="POST" onsubmit="return verif();">
                             <div class="row g-3">
@@ -231,7 +234,6 @@ include_once '../model/comment.php';
                                 </div>
                                 <div class="col-12">
                                     <button class="btn btn-primary w-100 py-3" type="submit" name="ajout" value="Ajouter" onsubmit="return verif()">Send comment</button>
-
                                 </div>
                             </div>
                         </form>

@@ -2,12 +2,12 @@
 
 class post
 {
-    private ?int $id = null;
+    private ?int $id_post = null;
     private ?string $date = null;
     private ?string $description = null;
 
     //private ?string $img = null;
-   // private ?int $id_comment = null;
+   // private ?int $id_post_comment = null;
 
 
     public function __construct($date, $description,$img)
@@ -15,17 +15,17 @@ class post
         $this->date = $date;
         $this->description = $description;
         $this->img = $img;
-        //$this->id_comment = $id_comment;
+        //$this->id_post_comment = $id_post_comment;
     }
 
     
-    public function getId()
+    public function getid_post()
     {
-        return $this->id;
+        return $this->id_post;
     }
-    public function setId($id)
+    public function setid_post($id_post)
     {
-        $this->id = $id;
+        $this->id_post = $id_post;
 
         return $this;
     }

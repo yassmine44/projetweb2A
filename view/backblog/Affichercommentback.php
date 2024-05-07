@@ -1,39 +1,16 @@
-<?php
-require "../../model/post.php";
+﻿<?php
 require "../../controller/commentC.php";
-require '../../controller/postC.php';
+require "../../model/comment.php";
 
+$d = new commentC();
 
-    $error = "";
-    // create user
-    $post = null;
-    $commentC = new commentC();
-    // create an instance of the controller
-    $postC = new postC();
-    if (
-        isset($_POST['date']) &&
-        isset($_POST['description'])
-    ){
-        if (
-            !empty($_POST["date"]) &&
-            !empty($_POST["description"])
-        ) {
-            $post = new post(
-                $_POST['date'],
-                $_POST['description'] ,
-                $_GET["id"]
-            );
-			$postC->ajouter($post);
-        }
-        else
-            $error = "Missing information";
-    }
+if (isset($_POST["aff"]) == "Tri") {
+  $tab = $d->tricomment();
+} else if (isset($_POST["affi"] )== "Search") {
+  $tab = $d->recherchecomment($_POST["rech"]);
+} else
+  $tab = $d->afficher();
 
-    //$comment=$commentC->recuperercomment($_GET["id"]);
-	if (isset($_POST['ajouter']))
-	{
-		header ('Location::ajouterpostback.php');
-	}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,11 +29,12 @@ require '../../controller/postC.php';
 	<meta name="format-detection" content="telephone=no">
 	
 	<!-- PAGE TITLE HERE -->
-	<title>JOBFLEX Dashboard</title>
+	<title>Jobflex Dashboard</title>
 	<link rel="icon" href="images/logojob.png">
-	
 	<!-- FAVICONS ICON -->
 	<link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <!-- Datatable -->
+    <link href="vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
     <!-- Custom Stylesheet -->
 	<link href="vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
@@ -88,11 +66,11 @@ require '../../controller/postC.php';
             Nav header start
         ***********************************-->
 		<div class="nav-header">
-        <a href="ajoutercommentback.php" class="brand-logo">
+        <a href="index.html" class="brand-logo">
         <div> <center> <img src="images/logojob.png" alt="logo"  width="80"  height="80"></center></div>
            
-               
-				
+                
+            	
             </a>
             <div class="nav-control">
                 <div class="hamburger">
@@ -612,14 +590,13 @@ require '../../controller/postC.php';
         <!--**********************************
             Header start
         ***********************************-->
-        <div class="header">
+       <div class="header">
             <div class="header-content">
                 <nav class="navbar navbar-expand">
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
 							<div class="dashboard_bar">
-                                Table réponse 
-                            </div>
+Affichage du comments                            </div>
 							
                         </div>
                         <ul class="navbar-nav header-right">
@@ -943,31 +920,22 @@ require '../../controller/postC.php';
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-table"></i>
-							<span class="nav-text">blog</span>
+							<span class="nav-text">Réclamation</span>
 						</a>
                         <ul aria-expanded="false">
-                        <li><a href="ajoutercommentback.php">Ajouter post</a></li>
-                            <li><a href="affichercommentback.php">Afficher comment </a></li>
-                            <li><a href="Afficherpostback.php">Afficher post   </a></li>                        </ul>
+                        <li><a href="Ajoutercommentback.php">Ajouter Réclamation</a></li>
+                            <li><a href="Affichercommentback.php">Afficher Réclamation </a></li>
+                            <li><a href="Afficherreponseback.php">Afficher Réponse   </a></li>
+                        </ul>
                     </li>
                     <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
 							<i class="fas fa-clone"></i>
-							<span class="nav-text">Pages</span>
+							<span class="nav-text">GO TO FRONT</span>
 						</a>
                         <ul aria-expanded="false">
-                            <li><a href="page-login.html">Login</a></li>
-                            <li><a href="page-register.html">Register</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="page-error-400.html">Error 400</a></li>
-                                    <li><a href="page-error-403.html">Error 403</a></li>
-                                    <li><a href="page-error-404.html">Error 404</a></li>
-                                    <li><a href="page-error-500.html">Error 500</a></li>
-                                    <li><a href="page-error-503.html">Error 503</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="page-lock-screen.html">Lock Screen</a></li>
-                            <li><a href="empty-page.html">Empty Page</a></li>
+                            <li><a href="">site web</a></li>
+                            <li><a href="">Register</a></li>
+                           
                         </ul>
                     </li>
                 </ul>
@@ -977,7 +945,7 @@ require '../../controller/postC.php';
 							<img src="images/pic5.jpg" alt="">
 						</div>
 						<div class="profile-info1">
-							<h4 class="fs-18 font-w500"> Chaima Khiari</h4>
+							<h4 class="fs-18 font-w500">chaima khiari</h4>
 							<span>chaimakhiari@gmail.com</span>
 						</div>
 						<div class="profile-button">
@@ -996,91 +964,114 @@ require '../../controller/postC.php';
 				</div>
 				
 				<div class="copyright">
-					<p><strong>JOBFLEX</strong> © 2021 All Rights Reserved</p>
-					<p class="fs-12">Made with <span class="heart"></span> by DexignLabs</p>
+                <p><strong>JOBFLEX</strong> © 2021 All Rights Reserved</p>				
+                	<p class="fs-12">Made with <span class="heart"></span> by DexignLabs</p>
 				</div>
 			</div>
         </div>
- <!--**********************************
+        <!--**********************************
             Sidebar end
         ***********************************-->
 
         <!--**********************************
             Content body start
         ***********************************-->
-
         <div class="content-body">
             <div class="container-fluid">
-            <div class="row page-titles">
-            <ol class="breadcrumb">
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Table</a></li>
-						<li class="breadcrumb-item"><a href="javascript:void(0)">   Ajout du Réponse</a></li>
-					</ol>
-                </div>
-  
+				
+				
 
-<div class="pagetitle">
-  <h1>Réponses</h1>
-  <nav>
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="#">Home</a></li>
-      <li class="breadcrumb-item">Réponses</li>
-      <li class="breadcrumb-item active">Ajouter</li>
-    </ol>
-  </nav>
-</div><!-- End Page Title -->
 
-<section class="section dashboard">
-  <div class="row">
-    <div class="col-12">
-      <div class="card recent-sales overflow-auto">
-        <div class="card-body">
-          <h5 class="card-title">post <span>| Ajout</span></h5>
-          <br>    
-          <form method="POST" onsubmit="return verif();" >
-            <div class="mb-5">
-              <div class="row">
-                <div class="card-body" style="margin-left:50px;">
-                  <form method="POST">
-                    <div class="row mb-3">
-                      <div class="col-sm-10">
-                        <input type="date" name="date" class="form-control" id="date" placeholder="Date">
-                      </div>
-                    </div>
-                    <div class="row mb-3">
-                      <div class="col-sm-10">
-                        <textarea name="description" class="form-control" id="description" placeholder="Description"></textarea>
+                <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>comments</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="AjoutercommentBack.php">Home</a></li>
+          <li class="breadcrumb-item">comments</li>
+          <li class="breadcrumb-item active">Affichage</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+      <div class="row">
+        <div class="col-12">
+          <div class="card recent-sales overflow-auto">
+            <div class="card-body">
+                <center>
+                    <form action="Affichercommentback.php" method="POST">
                         <br>
-                      </div>
-                    </div>
-                    <div class="text-center">
-                      <input class="btn btn-primary" type="submit" name="ajout" value="Ajouter">
-                    </div>
-              
-                  </form>
+                        <input type="text" placeholder="Search..." name="rech" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" >
+                        <input type="submit" class="btn btn-outline-info btn-sm" name="affi" value="Search" />
+                        <input type="submit" class="btn btn-outline-primary btn-sm" name="aff" value="Tri" />
+                    </form>
+                </center>
+              <h5 class="card-title">comments <span>| Affichage</span></h5>
+              <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> Nom </th>
+                            <th> Email </th>
+                            
+                            <th> Contenu </th>
+                           
+                            <th>    </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+					<?php foreach ($tab as $rec) { ?>
+                        <tr>
+                            <td> <?= $rec['nom'] ?> </td>
+                            <td> <?= $rec['email'] ?> </td>
+                            
+                            <td> <?= $rec['contenu'] ?> </td>
+                            <td>
+                                <a href="modifiercommentback.php?id=<?php echo $rec['idc']; ?>"><button class="btn btn-outline-success btn-sm">Modifier</button></a>
+								<a href="mailing.php?id=<?php echo $rec['email']; ?>"><button class="btn btn-outline-danger btn-sm">send_mail</button></a><br><br>
+                                <a href="delete.php?id=<?php echo $rec['idc']; ?>"><button class="btn btn-outline-danger btn-sm">Supprimer</button></a><br><br>
+								
+                               
+                            </td>
+                        </tr>
+                    <?php } ?>
+                    </tbody>
+                </table>
+              </div>
+			  <div align="center">
+                  <form method="POST" action="fpdf.php">
+                      <button type="submit" id="pdf" name="generate_pdf" class="btn btn-outline-primary btn-sm">
+                          <i class="fa fa-pdf" aria-hidden="true"></i>
+                          Générer PDF
+                      </button> 
+                  </form> 
+                </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+	  <div class="row ">
+        <div class="col-12 grid-margin">
+          <div class="card">
+            <div class="card-body" >
+              <h4 class="card-title">Statistiques des comments et des Réponses</h4>
+              <div class="col-lg-10 grid-margin stretch-card">
+                <div style="margin-left:250px;margin-top:50px;height:450;width:450px;">
+                    <canvas id="myChartt" width="400" height="400"></canvas>
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-				                         
-                                           
-        <!--**********************************
-            Content body end
-        ***********************************-->
-
-
         <!--**********************************
             Footer start
         ***********************************-->
         <div class="footer">
             <div class="copyright">
-                <p>Copyright © Designed &amp; Developed by <a href="../index.htm" target="_blank">JOBFLEX</a> 2024</p>
+                <p>Copyright © Designed &amp; Developed by <a href="../index.html" target="_blank">JOBFLEX</a> 2024</p>
             </div>
         </div>
         <!--**********************************
@@ -1106,12 +1097,44 @@ require '../../controller/postC.php';
     ***********************************-->
     <!-- Required vendors -->
     <script src="vendor/global/global.min.js"></script>
+    <script src="vendor/chart.js/Chart.bundle.min.js"></script>
+	<!-- Apex Chart -->
+	<script src="vendor/apexchart/apexchart.js"></script>
+	
+    <!-- Datatable -->
+    <script src="vendor/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="js/plugins-init/datatables.init.js"></script>
+
 	<script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+
     <script src="js/custom.min.js"></script>
 	<script src="js/dlabnav-init.js"></script>
 	<script src="js/demo.js"></script>
     <script src="js/styleSwitcher.js"></script>
-    <script src="js/jscodes.js"></script>
+	<script>
+      var xValues = ["comments avec reponses","comments sans reponses"];
+      var yValues = [<?php echo $d->count_AvecReponse();?>, <?php echo $d->count_comment()-$d->count_AvecReponse();?>];
+      var barColors = [
+              "#0d6efd",
+                "#0dcaf0"
+            ];  
 
+          new Chart("myChartt", {
+              type: "doughnut",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                    display: true,
+                    text: "comments - Réponses"
+                    }
+                }
+          });
+    </script>
 </body>
 </html>

@@ -28,14 +28,14 @@ $pass = "";
 $conn = new PDO("mysql:host=$host;dbname=$db", $user, $pass);
 
 // Exécuter la requête SQL
-$query = $conn->query("SELECT id, nom, email,contenu FROM comment");
+$query = $conn->query("SELECT idc, nom, email,contenu FROM comment");
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 // Créer le contenu du tableau
 $content = '';
 foreach($result as $row) {
     $content .= '<tr>
-        <td>'.$row['id'].'</td>
+        <td>'.$row['idc'].'</td>
         <td>'.$row['nom'].'</td>
         <td>'.$row['email'].'</td>
 		
