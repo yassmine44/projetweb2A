@@ -1,8 +1,25 @@
 <?php
+include 'phpqrcode/qrlib.php';
+
 include_once '../controller/reclamationC.php';
 include_once '../model/reclamation.php';
+require "../controller/reponseC.php";
+session_start(); // Démarrer la session
+
+// Stocker des données dans la session
+$_SESSION['user_email'] = 'chaimakhiari25@gmail.com';
+$_SESSION['user_name'] = 'cha';
+
+$reponseC = new reponseC();
+$user_email = $_SESSION['user_email'];
+$reponses = $reponseC->getReponsesByEmail($user_email);
+
+// Afficher les réponses dans le tableau HTML
 
 
+
+
+//
     $error = "";
     // create user
     $reclamation = null;
@@ -41,6 +58,7 @@ include_once '../model/reclamation.php';
         else
             $error = "Missing information";
    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -197,13 +215,13 @@ include_once '../model/reclamation.php';
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control border-0" id="nom"   name="nom" placeholder=" Name">
+                                        <input type="text" class="form-control border-0" id="nom"   name="nom" placeholder=" Name" value="<?php echo $_SESSION['user_name']; ?>">
                                         <label for="name"> Name</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control border-0"  name ="email" id="email" placeholder=" Email">
+                                        <input type="text" class="form-control border-0"  name ="email" id="email" placeholder=" Email"value="<?php echo isset($_SESSION['user_email']) ? $_SESSION['user_email'] : ''; ?>">
                                         <label for="email"> Email</label>
                                     </div>
                                 </div>
@@ -242,22 +260,32 @@ include_once '../model/reclamation.php';
                                     <button class="btn btn-primary w-100 py-3" type="submit" name="ajout" value="Ajouter" onsubmit="return verif()">Send Reclamation</button>
                                 </div>
                             </div>
+                            
                         </form>
                     </div>
                     <table class="table">
-                    <thead>
-                        <tr>
-                            <th> ID </th>  
-                            <th> Date </th>
-                            <th> Réponse </th>
-                         
-                        
-                        </tr>
-                    </thead>
-                    <tbody>
-					
-                    </tbody>
-                </table>
+    <thead>
+        <tr>
+            <th>ID-reponse</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>QR CODE </th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($reponses as $reponse) { ?>
+            <tr>
+                <td><?php echo $reponse['id']; ?></td>
+                <td><?php echo $reponse['date']; ?></td>
+                <td><?php echo $reponse['description']; ?></td>
+                <td><?php echo '<img src="QR.png" width="100px" hight="50px">';?></td>
+            </tr>
+        <?php } ?>
+        
+    </tbody>
+    
+</table>
+
                     <div class="col-12">
                         <div class="rounded">
                             

@@ -108,4 +108,28 @@ class reponseC
             die('Erreur: ' . $e->getMessage());
         }
     }
+
+    public function getReponsesByEmail($email) {
+        $dbHost = 'localhost';
+        $dbName = 'projetweb2a';
+        $dbUser = 'root';
+        $dbPassword = '';
+        try {
+            $pdo = new PDO("mysql:host=$dbHost;dbname=$dbName", $dbUser, $dbPassword);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "SELECT r.id, r.description, r.date, re.id AS id_reclamation, re.nom AS nom_reclamation, re.email AS email_reclamation
+        FROM reponse r
+        INNER JOIN reclamation re ON r.id_reclamation = re.id
+        WHERE re.email = :email";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->execute();
+            $reponses = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            return $reponses;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return array(); // Retourne un tableau vide en cas d'erreur
+        }
+    }
+    
 }

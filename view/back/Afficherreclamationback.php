@@ -1,4 +1,5 @@
 ﻿<?php
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require "../../controller/reclamationC.php";
 require "../../model/reclamation.php";
 
@@ -15,7 +16,7 @@ if (isset($_POST["aff"]) == "Tri" ) {
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head>_un 
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="keywords" content="">

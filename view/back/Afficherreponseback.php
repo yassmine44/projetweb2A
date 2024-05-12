@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require "../../controller/reclamationC.php";
 require '../../controller/reponseC.php';
 
@@ -1055,6 +1055,8 @@ Liste de Réponses                            </div>
                     <?php } ?>
                     </tbody>
                 </table>
+				<button id="filterApprovedBtn" class="btn btn-outline-primary btn-sm">Afficher les reponses d'aujourd'hui</button>
+					<button id="resetFilterBtn" class="btn btn-outline-secondary btn-sm">Réinitialiser le filtre</button>
               </div>
             </div>
           </div>
@@ -1112,5 +1114,33 @@ Liste de Réponses                            </div>
 	<script src="js/dlabnav-init.js"></script>
 	<script src="js/demo.js"></script>
     <script src="js/styleSwitcher.js"></script>
+	<script>
+	//
+	document.getElementById("filterApprovedBtn").addEventListener("click", function() {
+    var table = document.querySelector(".table");
+    var today = new Date().toISOString().slice(0, 10);
+
+    var rows = table.querySelectorAll("tbody tr");
+
+    rows.forEach(function(row) {
+        var rowDate = row.cells[0].innerText.trim(); // Assuming the date is in the first column
+        if (rowDate != today) {
+            row.style.display = "none";
+        } else {
+            row.style.display = "";
+        }
+    });
+});
+
+document.getElementById("resetFilterBtn").addEventListener("click", function() {
+    var table = document.querySelector(".table");
+    var rows = table.querySelectorAll("tbody tr");
+
+    rows.forEach(function(row) {
+        row.style.display = "";
+    });
+});
+
+</script>
 </body>
 </html>

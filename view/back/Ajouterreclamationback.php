@@ -1,4 +1,5 @@
 ﻿<?php
+error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 require "../../model/reclamation.php";
 require "../../controller/reclamationC.php";
 
@@ -1061,7 +1062,7 @@ require "../../controller/reclamationC.php";
                   </div>
                   <div class="row mb-3">
                     <div class="col-sm-10">
-                      <input type="date" class="form-control p-2" name="date" id="date">
+                      <input type="date" class="form-control p-2" name="date" id="date" value="<?php echo date('Y-m-d'); ?>">
                     </div>
                   </div>
                   <div class="row mb-3">

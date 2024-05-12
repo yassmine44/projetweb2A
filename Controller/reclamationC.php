@@ -64,16 +64,18 @@ class reclamationC
     }
     function rechercheReclamation($rech)
     {
-        $sql = "SELECT * FROM reclamation where reclamation.nom like '%$rech%' or reclamation.email like '%$rech%' or reclamation.sujet like '%$rech%' or reclamation.etat like '%$rech%' or reclamation.contenu like '%$rech%'";
+        $sql = "SELECT * FROM reclamation where reclamation.nom like '%$rech%'  or reclamation.email like '%$rech%' or reclamation.phone like '%$rech%' ";
         $db = config::getConnexion();
         try {
-            $list = $db->query($sql);
-            return $list;
+            $liste = $db->query($sql);
+            return $liste;
         } catch (Exception $e) {
             die('Erreur: ' . $e->getMessage());
         }
     }
+    
  
+    
    
     function modifier($reclamation, $id)
     {
