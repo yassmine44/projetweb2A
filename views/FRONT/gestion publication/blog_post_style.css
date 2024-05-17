@@ -1,0 +1,12 @@
+/* Style for the container */
+.publication-picture-container {
+    max-width: 100%; /* Adjust as needed */
+    margin: 0 auto; /* Center the container */
+}
+
+/* Style for the image */
+.publication-picture-container img {
+    max-width: 100%; /* Make sure the image doesn't exceed its container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure proper rendering as a block element */
+}

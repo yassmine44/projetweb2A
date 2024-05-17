@@ -81,7 +81,8 @@ class commentC
                 'UPDATE comment SET 
                     nom = :nom, 
                     email = :email,
-                    contenu = :contenu,
+                    contenu = :contenu
+                    
                    
                 WHERE idc= :idc'
             );
